@@ -1,0 +1,91 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "Osasumwen Ighodaro",
+      "matric": "SCI1708945",
+      "email": "osas@example.com",
+      "password": "123456",
+      "level": "400 Level",
+      "department": "Computer Science",
+      "cgpa": 4.21,
+      "role": "student"
+    }
+  ],
+  "submissions": [
+    {
+      "id": "1",
+      "studentId": 1,
+      "session": "2023/2024",
+      "semester": "First",
+      "status": "not_started",
+      "units": 0
+    }
+  ],
+  "courses": [
+    {
+      "id": "1",
+      "code": "CSC301",
+      "title": "Systems Programming",
+      "units": 3,
+      "level": "300",
+      "semester": "1",
+      "type": "core",
+      "prereq": "CSC201"
+    },
+    {
+      "id": "2",
+      "code": "CSC303",
+      "title": "Database Management",
+      "units": 4,
+      "level": "300",
+      "semester": "1",
+      "type": "core",
+      "prereq": "CSC202"
+    },
+    {
+      "id": "3",
+      "code": "CSC401",
+      "title": "Artificial Intelligence",
+      "units": 3,
+      "level": "400",
+      "semester": "1",
+      "type": "core",
+      "prereq": null,
+      "restricted": true
+    }
+  ],
+  "selections": [
+    {
+      "id": "1",
+      "code": "CSC301",
+      "title": "Systems Programming",
+      "units": 3,
+      "level": "300",
+      "semester": "1",
+      "type": "core",
+      "prereq": "CSC201"
+    },
+    {
+      "id": "2",
+      "code": "CSC303",
+      "title": "Database Management",
+      "units": 4,
+      "level": "300",
+      "semester": "1",
+      "type": "core",
+      "prereq": "CSC202"
+    },
+    {
+      "id": "3",
+      "code": "CSC401",
+      "title": "Artificial Intelligence",
+      "units": 3,
+      "level": "400",
+      "semester": "1",
+      "type": "core",
+      "prereq": null,
+      "restricted": true
+    }
+  ]
+}

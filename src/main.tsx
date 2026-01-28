@@ -4,13 +4,17 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <MantineProvider>
-        <App />
-      </MantineProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <MantineProvider>
+          <App />
+        </MantineProvider>
+      </BrowserRouter>
+    </Provider>
   </StrictMode>,
 );

@@ -20,6 +20,7 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import { useGetStudentsQuery } from "../../services/studentApi";
 
 const submissionStatus = {
   status: "not_started", // not_started | in_review | approved
@@ -27,6 +28,14 @@ const submissionStatus = {
 };
 
 export default function StudentDashboard() {
+  const { data, isLoading, error } = useGetStudentsQuery();
+  console.log(data);
+
+  if (isLoading) return <Text>Loading dashboard...</Text>;
+  if (error) return <Text>Error loading student data</Text>;
+
+  const student = data?.[0];
+
   return (
     <Stack gap="xl">
       {/* Welcome Card */}
@@ -39,11 +48,11 @@ export default function StudentDashboard() {
           />
 
           <Stack gap={4}>
-            <Title order={3}>Welcome back, Osasumwen Ighodaro</Title>
+            <Title order={3}>Welcome back, {student.name}</Title>
 
             <Group gap="xs">
-              <Badge variant="light">SCI1708945</Badge>
-              <Text c="dimmed">Computer Science · 400 Level</Text>
+              <Badge variant="light">{student.matric}</Badge>
+              <Text c="dimmed">Computer Science · {student.level}</Text>
             </Group>
           </Stack>
         </Group>
@@ -128,7 +137,7 @@ export default function StudentDashboard() {
 
               <Group justify="space-between">
                 <Text c="dimmed">CGPA</Text>
-                <Text fw={700}>4.21 / 5.00</Text>
+                <Text fw={700}>{student.cgpa} / 5.00</Text>
               </Group>
             </Stack>
           </Card>
