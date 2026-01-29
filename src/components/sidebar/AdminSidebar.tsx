@@ -2,6 +2,7 @@ import { Stack, Text, Group, NavLink, Avatar, Divider } from "@mantine/core";
 import {
   FiGrid,
   FiUsers,
+  FiUserCheck,
   FiBook,
   FiFileText,
   FiSettings,
@@ -38,7 +39,7 @@ export default function AdminSidebar({ toggle }: AdminSidebarProps) {
           component={Link}
           to="/admin/advisers"
           label="Advisers"
-          leftSection={<FiUsers />}
+          leftSection={<FiUserCheck />}
           active={pathname.startsWith("/admin/advisers")}
           onClick={toggle}
         />
