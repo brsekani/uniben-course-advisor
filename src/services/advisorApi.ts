@@ -6,7 +6,27 @@ export const advisorApi = baseApi.injectEndpoints({
       query: () => "/advisors",
       providesTags: ["Advisors"],
     }),
+    addAdvisor: builder.mutation({
+      query: (advisor) => ({
+        url: "/advisors",
+        method: "POST",
+        body: advisor,
+      }),
+      invalidatesTags: ["Advisors"],
+    }),
+    updateAdvisor: builder.mutation({
+      query: ({ id, ...advisor }) => ({
+        url: `/advisors/${id}`,
+        method: "PATCH",
+        body: advisor,
+      }),
+      invalidatesTags: ["Advisors"],
+    }),
   }),
 });
 
-export const { useGetAdvisorsQuery } = advisorApi;
+export const {
+  useGetAdvisorsQuery,
+  useAddAdvisorMutation,
+  useUpdateAdvisorMutation,
+} = advisorApi;
