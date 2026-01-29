@@ -7,7 +7,6 @@ import Submissions from "../pages/admin/Submissions";
 import Settings from "../pages/admin/Settings";
 import StudentLayout from "../layouts/StudentLayout";
 import StudentDashboard from "../pages/students/Dashboard";
-import AdvisingBuilder from "../pages/students/AdvisingBuilder";
 import FinalCourseReview from "../pages/students/FinalReview";
 import Results from "../pages/students/Results";
 import SemesterResult from "../pages/students/SemesterResult";
@@ -16,7 +15,7 @@ import ProfilePage from "../pages/students/ProfilePage";
 export const StudentRoutes = (
   <Route path="/student" element={<StudentLayout />}>
     <Route index element={<StudentDashboard />} />
-    <Route path="/student/advising" element={<AdvisingBuilder />} />
+    <Route path="/student/advising" element={<FinalCourseReview />} />
     <Route path="/student/advising/review" element={<FinalCourseReview />} />
     <Route path="/student/results" element={<Results />} />
     <Route path="/student/results/:id" element={<SemesterResult />} />

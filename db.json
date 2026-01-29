@@ -19,8 +19,17 @@
       "studyMode": "Full-Time",
       "entryYear": "2017",
       "program": "B.Sc Computer Science",
-      "carryOvers": ["MTH202"],
-      "completedCourses": ["CSC201", "CSC203", "CSC205", "CSC207", "MTH201", "GST201"]
+      "carryOvers": [
+        "MTH202"
+      ],
+      "completedCourses": [
+        "CSC201",
+        "CSC203",
+        "CSC205",
+        "CSC207",
+        "MTH201",
+        "GST201"
+      ]
     },
     {
       "id": "2",
@@ -42,7 +51,14 @@
       "entryYear": "2018",
       "program": "B.Sc Computer Science",
       "carryOvers": [],
-      "completedCourses": ["CSC201", "CSC203", "CSC205", "CSC207", "MTH201", "GST201"]
+      "completedCourses": [
+        "CSC201",
+        "CSC203",
+        "CSC205",
+        "CSC207",
+        "MTH201",
+        "GST201"
+      ]
     },
     {
       "id": "3",
@@ -63,8 +79,17 @@
       "studyMode": "Full-Time",
       "entryYear": "2019",
       "program": "B.Sc Computer Science",
-      "carryOvers": ["PHY102"],
-      "completedCourses": ["CSC101", "MTH101", "PHY101", "GST101", "CHM101", "GST103"]
+      "carryOvers": [
+        "PHY102"
+      ],
+      "completedCourses": [
+        "CSC101",
+        "MTH101",
+        "PHY101",
+        "GST101",
+        "CHM101",
+        "GST103"
+      ]
     },
     {
       "id": "4",
@@ -85,8 +110,17 @@
       "studyMode": "Full-Time",
       "entryYear": "2021",
       "program": "B.Sc Computer Science",
-      "carryOvers": ["PHY102", "MTH102"],
-      "completedCourses": ["CSC101", "MTH101", "PHY101", "GST101", "CHM101"]
+      "carryOvers": [
+        "PHY102",
+        "MTH102"
+      ],
+      "completedCourses": [
+        "CSC101",
+        "MTH101",
+        "PHY101",
+        "GST101",
+        "CHM101"
+      ]
     }
   ],
   "submissions": [
@@ -179,6 +213,28 @@
       "prereq": null,
       "restricted": false,
       "id": "GBBXijR"
+    },
+    {
+      "code": "CSC405",
+      "title": "Software Engineering",
+      "units": 3,
+      "level": "400",
+      "semester": "2",
+      "type": "core",
+      "prereq": "CSC303",
+      "studentId": "1",
+      "id": "FDGYWJ_"
+    },
+    {
+      "code": "CSC405",
+      "title": "Software Engineering",
+      "units": 3,
+      "level": "400",
+      "semester": "2",
+      "type": "core",
+      "prereq": "CSC303",
+      "studentId": "1",
+      "id": "SqBIQ3_"
     }
   ],
   "selections": [
@@ -190,7 +246,8 @@
       "level": "300",
       "semester": "1",
       "type": "core",
-      "prereq": "CSC201"
+      "prereq": "CSC201",
+      "studentId": "1"
     },
     {
       "id": "2",
@@ -200,7 +257,8 @@
       "level": "300",
       "semester": "1",
       "type": "core",
-      "prereq": "CSC202"
+      "prereq": "CSC202",
+      "studentId": "1"
     },
     {
       "id": "3",
@@ -211,7 +269,8 @@
       "semester": "1",
       "type": "core",
       "prereq": null,
-      "restricted": true
+      "restricted": true,
+      "studentId": "1"
     }
   ],
   "settings": {
@@ -236,7 +295,7 @@
       "totalCredits": 144,
       "standing": "Good Standing",
       "classLabel": "Second Class Upper",
-      "classRange": "4.50 – 5.00",
+      "classRange": "4.50 � 5.00",
       "classPercent": 78,
       "sessions": [
         {
@@ -252,13 +311,55 @@
               "gpa": 4.38,
               "credits": 21,
               "courses": [
-                { "code": "CSC411", "title": "Advanced Software Engineering", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC412", "title": "Artificial Intelligence", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC413", "title": "Cloud Computing", "units": 2, "grade": "A", "point": 10 },
-                { "code": "CSC414", "title": "Cybersecurity Principles", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC415", "title": "Compiler Construction", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC416", "title": "Web Services & Architecture", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC417", "title": "Industrial Attachment Report", "units": 4, "grade": "B", "point": 16 }
+                {
+                  "code": "CSC411",
+                  "title": "Advanced Software Engineering",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC412",
+                  "title": "Artificial Intelligence",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC413",
+                  "title": "Cloud Computing",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "CSC414",
+                  "title": "Cybersecurity Principles",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC415",
+                  "title": "Compiler Construction",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC416",
+                  "title": "Web Services & Architecture",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC417",
+                  "title": "Industrial Attachment Report",
+                  "units": 4,
+                  "grade": "B",
+                  "point": 16
+                }
               ]
             },
             {
@@ -266,11 +367,41 @@
               "gpa": 4.52,
               "credits": 17,
               "courses": [
-                { "code": "CSC421", "title": "Machine Learning", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC422", "title": "Distributed Systems", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC423", "title": "Mobile Computing", "units": 2, "grade": "B", "point": 8 },
-                { "code": "CSC424", "title": "Human Computer Interaction", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC425", "title": "Project", "units": 6, "grade": "A", "point": 30 }
+                {
+                  "code": "CSC421",
+                  "title": "Machine Learning",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC422",
+                  "title": "Distributed Systems",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC423",
+                  "title": "Mobile Computing",
+                  "units": 2,
+                  "grade": "B",
+                  "point": 8
+                },
+                {
+                  "code": "CSC424",
+                  "title": "Human Computer Interaction",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC425",
+                  "title": "Project",
+                  "units": 6,
+                  "grade": "A",
+                  "point": 30
+                }
               ]
             }
           ]
@@ -288,13 +419,55 @@
               "gpa": 4.08,
               "credits": 21,
               "courses": [
-                { "code": "CSC301", "title": "Systems Programming", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC303", "title": "Database Management", "units": 4, "grade": "B", "point": 16 },
-                { "code": "CSC305", "title": "Operating Systems", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC307", "title": "Data Communication", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC309", "title": "Numerical Methods", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST311", "title": "Entrepreneurship", "units": 2, "grade": "A", "point": 10 },
-                { "code": "CSC313", "title": "Web Technologies", "units": 3, "grade": "A", "point": 15 }
+                {
+                  "code": "CSC301",
+                  "title": "Systems Programming",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC303",
+                  "title": "Database Management",
+                  "units": 4,
+                  "grade": "B",
+                  "point": 16
+                },
+                {
+                  "code": "CSC305",
+                  "title": "Operating Systems",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC307",
+                  "title": "Data Communication",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC309",
+                  "title": "Numerical Methods",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST311",
+                  "title": "Entrepreneurship",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "CSC313",
+                  "title": "Web Technologies",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                }
               ]
             },
             {
@@ -302,13 +475,55 @@
               "gpa": 4.16,
               "credits": 21,
               "courses": [
-                { "code": "CSC320", "title": "Software Engineering", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC322", "title": "Computer Architecture", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC324", "title": "Algorithm Design", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC326", "title": "Information Security", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC328", "title": "Compiler Design", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC330", "title": "Research Methods", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST322", "title": "Peace Studies", "units": 3, "grade": "A", "point": 15 }
+                {
+                  "code": "CSC320",
+                  "title": "Software Engineering",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC322",
+                  "title": "Computer Architecture",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC324",
+                  "title": "Algorithm Design",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC326",
+                  "title": "Information Security",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC328",
+                  "title": "Compiler Design",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC330",
+                  "title": "Research Methods",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST322",
+                  "title": "Peace Studies",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                }
               ]
             }
           ]
@@ -323,15 +538,51 @@
           "semesters": [
             {
               "name": "First Semester",
-              "gpa": 4.40,
+              "gpa": 4.4,
               "credits": 18,
               "courses": [
-                { "code": "CSC201", "title": "Data Structures", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC203", "title": "Discrete Mathematics", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC205", "title": "Object-Oriented Programming", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC207", "title": "Logic Design", "units": 3, "grade": "A", "point": 15 },
-                { "code": "MTH201", "title": "Linear Algebra", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST201", "title": "Communication Skills", "units": 3, "grade": "A", "point": 15 }
+                {
+                  "code": "CSC201",
+                  "title": "Data Structures",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC203",
+                  "title": "Discrete Mathematics",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC205",
+                  "title": "Object-Oriented Programming",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC207",
+                  "title": "Logic Design",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "MTH201",
+                  "title": "Linear Algebra",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST201",
+                  "title": "Communication Skills",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                }
               ]
             },
             {
@@ -339,12 +590,48 @@
               "gpa": 4.36,
               "credits": 18,
               "courses": [
-                { "code": "CSC210", "title": "Algorithms", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC212", "title": "Assembly Language", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC214", "title": "Computer Organization", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC216", "title": "Statistics for Computing", "units": 3, "grade": "B", "point": 12 },
-                { "code": "MTH202", "title": "Calculus II", "units": 3, "grade": "A", "point": 15 },
-                { "code": "GST202", "title": "Leadership Studies", "units": 3, "grade": "A", "point": 15 }
+                {
+                  "code": "CSC210",
+                  "title": "Algorithms",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC212",
+                  "title": "Assembly Language",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC214",
+                  "title": "Computer Organization",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC216",
+                  "title": "Statistics for Computing",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "MTH202",
+                  "title": "Calculus II",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "GST202",
+                  "title": "Leadership Studies",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                }
               ]
             }
           ]
@@ -362,11 +649,41 @@
               "gpa": 3.92,
               "credits": 14,
               "courses": [
-                { "code": "CSC101", "title": "Introduction to Computer Science", "units": 3, "grade": "B", "point": 12 },
-                { "code": "MTH101", "title": "Algebra", "units": 3, "grade": "B", "point": 12 },
-                { "code": "PHY101", "title": "Mechanics", "units": 3, "grade": "C", "point": 9 },
-                { "code": "GST101", "title": "Use of English", "units": 2, "grade": "A", "point": 10 },
-                { "code": "GST103", "title": "Nigerian Peoples", "units": 3, "grade": "B", "point": 12 }
+                {
+                  "code": "CSC101",
+                  "title": "Introduction to Computer Science",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "MTH101",
+                  "title": "Algebra",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "PHY101",
+                  "title": "Mechanics",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "GST101",
+                  "title": "Use of English",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "GST103",
+                  "title": "Nigerian Peoples",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                }
               ]
             },
             {
@@ -374,11 +691,41 @@
               "gpa": 3.86,
               "credits": 14,
               "courses": [
-                { "code": "CSC102", "title": "Programming Fundamentals", "units": 3, "grade": "B", "point": 12 },
-                { "code": "MTH102", "title": "Calculus I", "units": 3, "grade": "B", "point": 12 },
-                { "code": "PHY102", "title": "Waves & Optics", "units": 3, "grade": "C", "point": 9 },
-                { "code": "CHM102", "title": "General Chemistry", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST104", "title": "Civic Education", "units": 2, "grade": "A", "point": 10 }
+                {
+                  "code": "CSC102",
+                  "title": "Programming Fundamentals",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "MTH102",
+                  "title": "Calculus I",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "PHY102",
+                  "title": "Waves & Optics",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "CHM102",
+                  "title": "General Chemistry",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST104",
+                  "title": "Civic Education",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                }
               ]
             }
           ]
@@ -392,7 +739,7 @@
       "totalCredits": 108,
       "standing": "Good Standing",
       "classLabel": "Second Class Upper",
-      "classRange": "3.50 – 4.49",
+      "classRange": "3.50 � 4.49",
       "classPercent": 79,
       "sessions": [
         {
@@ -405,15 +752,51 @@
           "semesters": [
             {
               "name": "First Semester",
-              "gpa": 4.10,
+              "gpa": 4.1,
               "credits": 18,
               "courses": [
-                { "code": "CSC301", "title": "Systems Programming", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC303", "title": "Database Management", "units": 4, "grade": "B", "point": 16 },
-                { "code": "CSC307", "title": "Data Communication", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC309", "title": "Numerical Methods", "units": 3, "grade": "A", "point": 15 },
-                { "code": "GST311", "title": "Entrepreneurship", "units": 2, "grade": "A", "point": 10 },
-                { "code": "CSC313", "title": "Web Technologies", "units": 3, "grade": "A", "point": 15 }
+                {
+                  "code": "CSC301",
+                  "title": "Systems Programming",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC303",
+                  "title": "Database Management",
+                  "units": 4,
+                  "grade": "B",
+                  "point": 16
+                },
+                {
+                  "code": "CSC307",
+                  "title": "Data Communication",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC309",
+                  "title": "Numerical Methods",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "GST311",
+                  "title": "Entrepreneurship",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "CSC313",
+                  "title": "Web Technologies",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                }
               ]
             },
             {
@@ -421,12 +804,48 @@
               "gpa": 4.06,
               "credits": 18,
               "courses": [
-                { "code": "CSC320", "title": "Software Engineering", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC322", "title": "Computer Architecture", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC324", "title": "Algorithm Design", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC326", "title": "Information Security", "units": 3, "grade": "A", "point": 15 },
-                { "code": "GST322", "title": "Peace Studies", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC330", "title": "Research Methods", "units": 3, "grade": "B", "point": 12 }
+                {
+                  "code": "CSC320",
+                  "title": "Software Engineering",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC322",
+                  "title": "Computer Architecture",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC324",
+                  "title": "Algorithm Design",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC326",
+                  "title": "Information Security",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "GST322",
+                  "title": "Peace Studies",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC330",
+                  "title": "Research Methods",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                }
               ]
             }
           ]
@@ -444,13 +863,55 @@
               "gpa": 3.88,
               "credits": 19,
               "courses": [
-                { "code": "CSC201", "title": "Data Structures", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC203", "title": "Discrete Mathematics", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC205", "title": "Object-Oriented Programming", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC207", "title": "Logic Design", "units": 3, "grade": "A", "point": 15 },
-                { "code": "MTH201", "title": "Linear Algebra", "units": 3, "grade": "A", "point": 15 },
-                { "code": "GST201", "title": "Communication Skills", "units": 2, "grade": "A", "point": 10 },
-                { "code": "GST203", "title": "Philosophy", "units": 2, "grade": "B", "point": 8 }
+                {
+                  "code": "CSC201",
+                  "title": "Data Structures",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC203",
+                  "title": "Discrete Mathematics",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC205",
+                  "title": "Object-Oriented Programming",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC207",
+                  "title": "Logic Design",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "MTH201",
+                  "title": "Linear Algebra",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "GST201",
+                  "title": "Communication Skills",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "GST203",
+                  "title": "Philosophy",
+                  "units": 2,
+                  "grade": "B",
+                  "point": 8
+                }
               ]
             },
             {
@@ -458,13 +919,55 @@
               "gpa": 3.96,
               "credits": 19,
               "courses": [
-                { "code": "CSC210", "title": "Algorithms", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC212", "title": "Assembly Language", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC214", "title": "Computer Organization", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC216", "title": "Statistics for Computing", "units": 3, "grade": "A", "point": 15 },
-                { "code": "MTH202", "title": "Calculus II", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST202", "title": "Leadership Studies", "units": 3, "grade": "A", "point": 15 },
-                { "code": "GST204", "title": "History", "units": 1, "grade": "B", "point": 4 }
+                {
+                  "code": "CSC210",
+                  "title": "Algorithms",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC212",
+                  "title": "Assembly Language",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC214",
+                  "title": "Computer Organization",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC216",
+                  "title": "Statistics for Computing",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "MTH202",
+                  "title": "Calculus II",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST202",
+                  "title": "Leadership Studies",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "GST204",
+                  "title": "History",
+                  "units": 1,
+                  "grade": "B",
+                  "point": 4
+                }
               ]
             }
           ]
@@ -482,25 +985,97 @@
               "gpa": 3.85,
               "credits": 17,
               "courses": [
-                { "code": "CSC101", "title": "Introduction to Computer Science", "units": 3, "grade": "B", "point": 12 },
-                { "code": "MTH101", "title": "Algebra", "units": 3, "grade": "B", "point": 12 },
-                { "code": "PHY101", "title": "Mechanics", "units": 3, "grade": "C", "point": 9 },
-                { "code": "GST101", "title": "Use of English", "units": 2, "grade": "A", "point": 10 },
-                { "code": "CHM101", "title": "General Chemistry", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST103", "title": "Nigerian Peoples", "units": 3, "grade": "B", "point": 12 }
+                {
+                  "code": "CSC101",
+                  "title": "Introduction to Computer Science",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "MTH101",
+                  "title": "Algebra",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "PHY101",
+                  "title": "Mechanics",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "GST101",
+                  "title": "Use of English",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "CHM101",
+                  "title": "General Chemistry",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST103",
+                  "title": "Nigerian Peoples",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                }
               ]
             },
             {
               "name": "Second Semester",
-              "gpa": 3.90,
+              "gpa": 3.9,
               "credits": 17,
               "courses": [
-                { "code": "CSC102", "title": "Programming Fundamentals", "units": 3, "grade": "B", "point": 12 },
-                { "code": "MTH102", "title": "Calculus I", "units": 3, "grade": "B", "point": 12 },
-                { "code": "PHY102", "title": "Waves & Optics", "units": 3, "grade": "C", "point": 9 },
-                { "code": "CHM102", "title": "General Chemistry", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST104", "title": "Civic Education", "units": 2, "grade": "A", "point": 10 },
-                { "code": "GST106", "title": "Peace Studies", "units": 3, "grade": "B", "point": 12 }
+                {
+                  "code": "CSC102",
+                  "title": "Programming Fundamentals",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "MTH102",
+                  "title": "Calculus I",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "PHY102",
+                  "title": "Waves & Optics",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "CHM102",
+                  "title": "General Chemistry",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST104",
+                  "title": "Civic Education",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "GST106",
+                  "title": "Peace Studies",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                }
               ]
             }
           ]
@@ -514,7 +1089,7 @@
       "totalCredits": 76,
       "standing": "Good Standing",
       "classLabel": "Second Class Upper",
-      "classRange": "3.50 – 4.49",
+      "classRange": "3.50 � 4.49",
       "classPercent": 81,
       "sessions": [
         {
@@ -527,16 +1102,58 @@
           "semesters": [
             {
               "name": "First Semester",
-              "gpa": 4.10,
+              "gpa": 4.1,
               "credits": 19,
               "courses": [
-                { "code": "CSC201", "title": "Data Structures", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC203", "title": "Discrete Mathematics", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC205", "title": "Object-Oriented Programming", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC207", "title": "Logic Design", "units": 3, "grade": "A", "point": 15 },
-                { "code": "MTH201", "title": "Linear Algebra", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST201", "title": "Communication Skills", "units": 2, "grade": "A", "point": 10 },
-                { "code": "GST203", "title": "Philosophy", "units": 2, "grade": "B", "point": 8 }
+                {
+                  "code": "CSC201",
+                  "title": "Data Structures",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC203",
+                  "title": "Discrete Mathematics",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC205",
+                  "title": "Object-Oriented Programming",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC207",
+                  "title": "Logic Design",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "MTH201",
+                  "title": "Linear Algebra",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST201",
+                  "title": "Communication Skills",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "GST203",
+                  "title": "Philosophy",
+                  "units": 2,
+                  "grade": "B",
+                  "point": 8
+                }
               ]
             },
             {
@@ -544,13 +1161,55 @@
               "gpa": 4.14,
               "credits": 19,
               "courses": [
-                { "code": "CSC210", "title": "Algorithms", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC212", "title": "Assembly Language", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CSC214", "title": "Computer Organization", "units": 3, "grade": "A", "point": 15 },
-                { "code": "CSC216", "title": "Statistics for Computing", "units": 3, "grade": "B", "point": 12 },
-                { "code": "MTH202", "title": "Calculus II", "units": 3, "grade": "A", "point": 15 },
-                { "code": "GST202", "title": "Leadership Studies", "units": 3, "grade": "A", "point": 15 },
-                { "code": "GST204", "title": "History", "units": 1, "grade": "B", "point": 4 }
+                {
+                  "code": "CSC210",
+                  "title": "Algorithms",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC212",
+                  "title": "Assembly Language",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CSC214",
+                  "title": "Computer Organization",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "CSC216",
+                  "title": "Statistics for Computing",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "MTH202",
+                  "title": "Calculus II",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "GST202",
+                  "title": "Leadership Studies",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "GST204",
+                  "title": "History",
+                  "units": 1,
+                  "grade": "B",
+                  "point": 4
+                }
               ]
             }
           ]
@@ -568,13 +1227,55 @@
               "gpa": 4.02,
               "credits": 19,
               "courses": [
-                { "code": "CSC101", "title": "Introduction to Computer Science", "units": 3, "grade": "A", "point": 15 },
-                { "code": "MTH101", "title": "Algebra", "units": 3, "grade": "B", "point": 12 },
-                { "code": "PHY101", "title": "Mechanics", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST101", "title": "Use of English", "units": 2, "grade": "A", "point": 10 },
-                { "code": "CHM101", "title": "General Chemistry", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST103", "title": "Nigerian Peoples", "units": 3, "grade": "A", "point": 15 },
-                { "code": "GST105", "title": "ICT Fundamentals", "units": 2, "grade": "A", "point": 10 }
+                {
+                  "code": "CSC101",
+                  "title": "Introduction to Computer Science",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "MTH101",
+                  "title": "Algebra",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "PHY101",
+                  "title": "Mechanics",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST101",
+                  "title": "Use of English",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "CHM101",
+                  "title": "General Chemistry",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST103",
+                  "title": "Nigerian Peoples",
+                  "units": 3,
+                  "grade": "A",
+                  "point": 15
+                },
+                {
+                  "code": "GST105",
+                  "title": "ICT Fundamentals",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                }
               ]
             },
             {
@@ -582,13 +1283,55 @@
               "gpa": 3.94,
               "credits": 19,
               "courses": [
-                { "code": "CSC102", "title": "Programming Fundamentals", "units": 3, "grade": "B", "point": 12 },
-                { "code": "MTH102", "title": "Calculus I", "units": 3, "grade": "B", "point": 12 },
-                { "code": "PHY102", "title": "Waves & Optics", "units": 3, "grade": "B", "point": 12 },
-                { "code": "CHM102", "title": "General Chemistry", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST104", "title": "Civic Education", "units": 2, "grade": "A", "point": 10 },
-                { "code": "GST106", "title": "Peace Studies", "units": 3, "grade": "B", "point": 12 },
-                { "code": "GST108", "title": "Library Studies", "units": 2, "grade": "A", "point": 10 }
+                {
+                  "code": "CSC102",
+                  "title": "Programming Fundamentals",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "MTH102",
+                  "title": "Calculus I",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "PHY102",
+                  "title": "Waves & Optics",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "CHM102",
+                  "title": "General Chemistry",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST104",
+                  "title": "Civic Education",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                },
+                {
+                  "code": "GST106",
+                  "title": "Peace Studies",
+                  "units": 3,
+                  "grade": "B",
+                  "point": 12
+                },
+                {
+                  "code": "GST108",
+                  "title": "Library Studies",
+                  "units": 2,
+                  "grade": "A",
+                  "point": 10
+                }
               ]
             }
           ]
@@ -602,7 +1345,7 @@
       "totalCredits": 32,
       "standing": "Probation",
       "classLabel": "Second Class Lower",
-      "classRange": "2.40 – 3.49",
+      "classRange": "2.40 � 3.49",
       "classPercent": 68,
       "sessions": [
         {
@@ -618,12 +1361,48 @@
               "gpa": 3.35,
               "credits": 16,
               "courses": [
-                { "code": "CSC101", "title": "Introduction to Computer Science", "units": 3, "grade": "C", "point": 9 },
-                { "code": "MTH101", "title": "Algebra", "units": 3, "grade": "C", "point": 9 },
-                { "code": "PHY101", "title": "Mechanics", "units": 3, "grade": "D", "point": 6 },
-                { "code": "GST101", "title": "Use of English", "units": 2, "grade": "B", "point": 8 },
-                { "code": "CHM101", "title": "General Chemistry", "units": 3, "grade": "C", "point": 9 },
-                { "code": "GST103", "title": "Nigerian Peoples", "units": 2, "grade": "B", "point": 8 }
+                {
+                  "code": "CSC101",
+                  "title": "Introduction to Computer Science",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "MTH101",
+                  "title": "Algebra",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "PHY101",
+                  "title": "Mechanics",
+                  "units": 3,
+                  "grade": "D",
+                  "point": 6
+                },
+                {
+                  "code": "GST101",
+                  "title": "Use of English",
+                  "units": 2,
+                  "grade": "B",
+                  "point": 8
+                },
+                {
+                  "code": "CHM101",
+                  "title": "General Chemistry",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "GST103",
+                  "title": "Nigerian Peoples",
+                  "units": 2,
+                  "grade": "B",
+                  "point": 8
+                }
               ]
             },
             {
@@ -631,12 +1410,48 @@
               "gpa": 3.49,
               "credits": 16,
               "courses": [
-                { "code": "CSC102", "title": "Programming Fundamentals", "units": 3, "grade": "C", "point": 9 },
-                { "code": "MTH102", "title": "Calculus I", "units": 3, "grade": "C", "point": 9 },
-                { "code": "PHY102", "title": "Waves & Optics", "units": 3, "grade": "D", "point": 6 },
-                { "code": "CHM102", "title": "General Chemistry", "units": 3, "grade": "C", "point": 9 },
-                { "code": "GST104", "title": "Civic Education", "units": 2, "grade": "B", "point": 8 },
-                { "code": "GST106", "title": "Peace Studies", "units": 2, "grade": "B", "point": 8 }
+                {
+                  "code": "CSC102",
+                  "title": "Programming Fundamentals",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "MTH102",
+                  "title": "Calculus I",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "PHY102",
+                  "title": "Waves & Optics",
+                  "units": 3,
+                  "grade": "D",
+                  "point": 6
+                },
+                {
+                  "code": "CHM102",
+                  "title": "General Chemistry",
+                  "units": 3,
+                  "grade": "C",
+                  "point": 9
+                },
+                {
+                  "code": "GST104",
+                  "title": "Civic Education",
+                  "units": 2,
+                  "grade": "B",
+                  "point": 8
+                },
+                {
+                  "code": "GST106",
+                  "title": "Peace Studies",
+                  "units": 2,
+                  "grade": "B",
+                  "point": 8
+                }
               ]
             }
           ]
@@ -655,7 +1470,7 @@
       "role": "advisor",
       "status": "Active",
       "level": "200",
-      "title": "Senior Lecturer • Staff Adviser",
+      "title": "Senior Lecturer � Staff Adviser",
       "office": "Block C, Room 402, Faculty of Physical Sciences"
     },
     {
@@ -668,7 +1483,7 @@
       "role": "advisor",
       "status": "Active",
       "level": "300",
-      "title": "Lecturer I • Staff Adviser",
+      "title": "Lecturer I � Staff Adviser",
       "office": "Block B, Room 215, Faculty of Physical Sciences"
     },
     {
@@ -681,7 +1496,7 @@
       "role": "advisor",
       "status": "Active",
       "level": "400",
-      "title": "Senior Lecturer • Staff Adviser",
+      "title": "Senior Lecturer � Staff Adviser",
       "office": "Block A, Room 118, Faculty of Computing"
     }
   ],

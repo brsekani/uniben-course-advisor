@@ -13,8 +13,16 @@ import {
   Divider,
   List,
   Grid,
+  Select,
+  ActionIcon,
 } from "@mantine/core";
-import { FiAlertTriangle, FiCheckCircle, FiInfo } from "react-icons/fi";
+import {
+  FiAlertTriangle,
+  FiCheckCircle,
+  FiInfo,
+  FiPlus,
+  FiTrash2,
+} from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import { notifications } from "@mantine/notifications";
 import { useMemo, useState } from "react";
@@ -27,7 +35,10 @@ import {
   useGetSubmissionsQuery,
   useUpdateSubmissionMutation,
 } from "../../services/submissionApi";
-import { useAddCourseMutation, useRemoveCourseMutation } from "../../services/selectionApi";
+import {
+  useAddCourseMutation,
+  useRemoveCourseMutation,
+} from "../../services/selectionApi";
 
 type RuleWarning = {
   type: "warning" | "error" | "success" | "info";
@@ -47,8 +58,10 @@ export default function FinalCourseReview() {
   const [updateSubmission, { isLoading: isUpdatingSubmission }] =
     useUpdateSubmissionMutation();
   const [addCourse, { isLoading: isAddingCourse }] = useAddCourseMutation();
-  const [removeCourse, { isLoading: isRemovingCourse }] = useRemoveCourseMutation();
+  const [removeCourse, { isLoading: isRemovingCourse }] =
+    useRemoveCourseMutation();
   const [confirmed, setConfirmed] = useState(false);
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null);
 
   const userId = localStorage.getItem("userId");
   const student =
@@ -127,9 +140,7 @@ export default function FinalCourseReview() {
     warnings.push({
       type: "warning",
       title: "Carry over courses",
-      message: `You still have carry over course(s) not added: ${unmetCarryOvers.join(
-        ", ",
-      )}.`,
+      message: `You still have carry over course(s) not added: ${unmetCarryOvers.join(", ")}.`,
     });
   }
 
@@ -175,6 +186,81 @@ export default function FinalCourseReview() {
   const submission = submissions?.find(
     (item: any) => String(item.studentId) === String(student?.id),
   );
+
+  const selectedCodes = new Set(
+    selectedCourses.map((item: any) => String(item.code)),
+  );
+  const allCourseOptions = (courses ?? [])
+    .filter((course: any) => !selectedCodes.has(String(course.code)))
+    .map((course: any) => ({
+      value: String(course.id ?? course.code),
+      label: `${course.code} - ${course.title}`,
+    }));
+
+  const handleAddCourse = async () => {
+    if (!selectedCourseId) {
+      notifications.show({
+        color: "red",
+        title: "Select a course",
+        message: "Please choose a course to add.",
+      });
+      return;
+    }
+    const course = (courses ?? []).find(
+      (item: any) => String(item.id ?? item.code) === selectedCourseId,
+    );
+    if (!course) return;
+
+    const alreadyAdded = selectedCourses.some(
+      (item: any) => String(item.code) === String(course.code),
+    );
+    if (alreadyAdded) {
+      notifications.show({
+        color: "red",
+        title: "Already added",
+        message: "This course is already in your list.",
+      });
+      return;
+    }
+
+    const totalUnitsAfter = totalUnits + Number(course.units ?? 0);
+    if (totalUnitsAfter > rules.maxUnits) {
+      notifications.show({
+        color: "red",
+        title: "Unit limit exceeded",
+        message: `Maximum allowed units is ${rules.maxUnits}.`,
+      });
+      return;
+    }
+
+    if (course.prereq && !completedCourses.includes(course.prereq)) {
+      notifications.show({
+        color: "red",
+        title: "Missing prerequisite",
+        message: `${course.code} requires ${course.prereq}.`,
+      });
+      return;
+    }
+
+    if (
+      course.restricted &&
+      Number(student?.cgpa ?? 0) < Number(settings?.restrictedMinCgpa ?? 0)
+    ) {
+      notifications.show({
+        color: "red",
+        title: "Restricted course",
+        message: "Your CGPA does not meet the requirement for this course.",
+      });
+      return;
+    }
+
+    const { id: _id, ...payload } = course;
+    await addCourse({
+      ...payload,
+      studentId: String(student?.id),
+    }).unwrap();
+    setSelectedCourseId(null);
+  };
 
   const handleSubmit = async () => {
     if (!confirmed) {
@@ -285,10 +371,29 @@ export default function FinalCourseReview() {
                 Allowed Unit Range
               </Text>
               <Title order={3} mt={4}>
-                {rules.minUnits} – {rules.maxUnits} Units
+                {rules.minUnits} - {rules.maxUnits} Units
               </Title>
             </Card>
           </Group>
+
+          {/* Search + Add */}
+          <Card withBorder radius="lg" mt="lg" p="md">
+            <Group align="flex-end">
+              <Select
+                searchable
+                clearable
+                label="Search courses"
+                placeholder="Type course code or title..."
+                data={allCourseOptions}
+                value={selectedCourseId}
+                onChange={setSelectedCourseId}
+                style={{ flex: 1 }}
+              />
+              <Button leftSection={<FiPlus />} onClick={handleAddCourse}>
+                Add
+              </Button>
+            </Group>
+          </Card>
 
           {/* Courses Table */}
           <Card withBorder radius="lg" mt="lg">
@@ -317,17 +422,16 @@ export default function FinalCourseReview() {
                       </Badge>
                     </Table.Td>
                     <Table.Td ta="right">
-                      <Button
-                        size="xs"
-                        variant="light"
+                      <ActionIcon
+                        variant="subtle"
                         color="red"
                         loading={isRemovingCourse}
                         onClick={async () => {
                           await removeCourse(c.id).unwrap();
                         }}
                       >
-                        Remove
-                      </Button>
+                        <FiTrash2 />
+                      </ActionIcon>
                     </Table.Td>
                   </Table.Tr>
                 ))}
@@ -393,14 +497,18 @@ export default function FinalCourseReview() {
                 {suggestedCourses.slice(0, 5).map((course: any) => (
                   <Group key={course.code} justify="space-between">
                     <Text size="sm">
-                      {course.code} • {course.title}
+                      {course.code} - {course.title}
                     </Text>
                     <Button
                       size="xs"
                       variant="light"
                       loading={isAddingCourse}
                       onClick={async () => {
-                        await addCourse(course).unwrap();
+                        const { id: _id, ...payload } = course;
+                        await addCourse({
+                          ...payload,
+                          studentId: String(student?.id),
+                        }).unwrap();
                       }}
                     >
                       Add
@@ -443,11 +551,11 @@ export default function FinalCourseReview() {
 
             <Button
               component={Link}
-              to="/student/advising"
+              to="/student/advising/review"
               size="md"
               variant="light"
             >
-              Go Back to Edit
+              Go Back to Review
             </Button>
           </Group>
 

@@ -8,6 +8,7 @@ type CourseItemProps = {
   prereq?: string;
   added?: boolean;
   restricted?: boolean;
+  showAction?: boolean;
   onAdd: () => void; // ✅ typed
 };
 
@@ -18,6 +19,7 @@ export function CourseItem({
   prereq,
   added = false,
   restricted = false,
+  showAction = true,
   onAdd,
 }: CourseItemProps) {
   return (
@@ -37,19 +39,21 @@ export function CourseItem({
         </Group>
 
         {/* Action */}
-        {restricted ? (
-          <Badge color="red" variant="light">
-            Locked
-          </Badge>
-        ) : added ? (
-          <Badge color="green" leftSection={<FiCheck size={12} />}>
-            Added
-          </Badge>
-        ) : (
-          <Button size="xs" leftSection={<FiPlus />} onClick={onAdd}>
-            Add
-          </Button>
-        )}
+        {showAction ? (
+          restricted ? (
+            <Badge color="red" variant="light">
+              Locked
+            </Badge>
+          ) : added ? (
+            <Badge color="green" leftSection={<FiCheck size={12} />}>
+              Added
+            </Badge>
+          ) : (
+            <Button size="xs" leftSection={<FiPlus />} onClick={onAdd}>
+              Add
+            </Button>
+          )
+        ) : null}
       </Group>
     </Card>
   );

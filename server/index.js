@@ -73,8 +73,9 @@ server.get("/advisor/recommendations/:studentId", (req, res) => {
 
 server.use(router);
 
-const port = Number(process.env.PORT ?? 4000);
-server.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log(`API server running on http://localhost:${port}`);
+const PORT = process.env.PORT || 4000;
+const HOST = '0.0.0.0';
+
+server.listen(PORT, HOST, () => {
+  console.log(`API server running on http://${HOST}:${PORT}`);
 });

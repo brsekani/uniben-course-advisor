@@ -10,6 +10,7 @@ import {
   Text,
 } from "@mantine/core";
 import { FiLogIn } from "react-icons/fi";
+import { API_BASE_URL } from "../services/baseApi";
 
 type UserRole = "student" | "advisor" | "admin";
 
@@ -37,9 +38,9 @@ export default function Login({ setRole }: Props) {
 
     try {
       const [studentsRes, advisorsRes, adminsRes] = await Promise.all([
-        fetch("http://localhost:4000/students"),
-        fetch("http://localhost:4000/advisors"),
-        fetch("http://localhost:4000/admins"),
+        fetch(`${API_BASE_URL}/students`),
+        fetch(`${API_BASE_URL}/advisors`),
+        fetch(`${API_BASE_URL}/admins`),
       ]);
 
       if (!studentsRes.ok || !advisorsRes.ok || !adminsRes.ok) {

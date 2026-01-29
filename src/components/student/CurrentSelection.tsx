@@ -7,22 +7,23 @@ import {
   Stack,
   Text,
   Title,
+  ActionIcon,
 } from "@mantine/core";
-import { SelectedCourse } from "./SelectedCourse";
-import { FiRefreshCw, FiTrash2 } from "react-icons/fi";
-import { ValidationConsole } from "./ValidationConsole";
+import { FiTrash2 } from "react-icons/fi";
 import {
-  useGetSelectionQuery,
   useRemoveCourseMutation,
   useResetSelectionMutation,
 } from "../../services/selectionApi";
 
-export function CurrentSelection() {
-  const { data: selected = [] } = useGetSelectionQuery();
+type Props = {
+  selected: any[];
+  totalUnits: number;
+  maxUnits: number;
+};
+
+export function CurrentSelection({ selected, totalUnits, maxUnits }: Props) {
   const [removeCourse] = useRemoveCourseMutation();
   const [reset] = useResetSelectionMutation();
-
-  const totalUnits = selected.reduce((sum: number, c: any) => sum + c.units, 0);
 
   return (
     <Stack gap="md" style={{ flex: 1 }}>
@@ -36,10 +37,10 @@ export function CurrentSelection() {
           </Group>
 
           <Text fw={700} size="lg">
-            {totalUnits} / 24 Units
+            {totalUnits} / {maxUnits} Units
           </Text>
 
-          <Progress value={(totalUnits / 24) * 100} radius="xl" />
+          <Progress value={(totalUnits / maxUnits) * 100} radius="xl" />
 
           <Divider />
 
@@ -48,12 +49,17 @@ export function CurrentSelection() {
               <Text>
                 <b>{c.units}</b> · {c.code}: {c.title}
               </Text>
-              <FiTrash2 onClick={() => removeCourse(c.id)} />
+              <ActionIcon
+                variant="subtle"
+                color="red"
+                onClick={() => removeCourse(c.id)}
+              >
+                <FiTrash2 />
+              </ActionIcon>
             </Group>
           ))}
         </Stack>
       </Card>
-      <ValidationConsole />
     </Stack>
   );
 }

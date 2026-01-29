@@ -1,27 +1,13 @@
-import { Badge, Card, Divider, Group, Stack, Text } from "@mantine/core";
+import { Badge, Card, Divider, Group, Stack, Text, List } from "@mantine/core";
+import { FiCheckCircle } from "react-icons/fi";
 
 type Props = {
-  totalUnits: number;
-  minUnits: number;
-  maxUnits: number;
+  errors: string[];
+  warnings: string[];
+  suggestions: string[];
 };
 
-export function ValidationConsole({ totalUnits, minUnits, maxUnits }: Props) {
-  const errors: string[] = [];
-  const warnings: string[] = [];
-
-  if (totalUnits > maxUnits) {
-    errors.push(
-      `❌ Maximum allowed units is ${maxUnits}. You selected ${totalUnits}.`,
-    );
-  }
-
-  if (totalUnits < minUnits) {
-    warnings.push(
-      `⚠️ Minimum full-time units is ${minUnits}. You selected ${totalUnits}.`,
-    );
-  }
-
+export function ValidationConsole({ errors, warnings, suggestions }: Props) {
   return (
     <Card radius="lg" p="lg" style={{ background: "#0f172a", color: "#fff" }}>
       <Stack gap="sm">
@@ -48,7 +34,21 @@ export function ValidationConsole({ totalUnits, minUnits, maxUnits }: Props) {
         ))}
 
         {!errors.length && !warnings.length && (
-          <Text c="green">✅ All rules satisfied</Text>
+          <Text c="green">
+            <FiCheckCircle /> All rules satisfied
+          </Text>
+        )}
+
+        {suggestions.length > 0 && (
+          <>
+            <Divider />
+            <Text fw={600}>Smart Suggestions</Text>
+            <List spacing="xs">
+              {suggestions.map((item, i) => (
+                <List.Item key={i}>{item}</List.Item>
+              ))}
+            </List>
+          </>
         )}
       </Stack>
     </Card>

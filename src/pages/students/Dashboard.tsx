@@ -63,11 +63,7 @@ export default function StudentDashboard() {
     .join("");
 
   const actionLink =
-    status === "not_started"
-      ? "/student/advising"
-      : status === "in_review"
-        ? "/student/advising/review"
-        : "/student/results";
+    status === "approved" ? "/student/results" : "/student/advising/review";
 
   return (
     <Stack gap="xl">
