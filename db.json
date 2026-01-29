@@ -53,6 +53,26 @@
       "type": "core",
       "prereq": null,
       "restricted": true
+    },
+    {
+      "id": "4",
+      "code": "CSC403",
+      "title": "Computer Networks",
+      "units": 3,
+      "level": "400",
+      "semester": "1",
+      "type": "core",
+      "prereq": "CSC301"
+    },
+    {
+      "id": "5",
+      "code": "CSC405",
+      "title": "Software Engineering",
+      "units": 3,
+      "level": "400",
+      "semester": "2",
+      "type": "core",
+      "prereq": "CSC303"
     }
   ],
   "selections": [
@@ -87,5 +107,9 @@
       "prereq": null,
       "restricted": true
     }
-  ]
+  ],
+  "settings": {
+    "restrictedMinCgpa": 4.0,
+    "maxUnitsPerSemester": 24
+  }
 }

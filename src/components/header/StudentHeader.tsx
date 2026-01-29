@@ -1,7 +1,10 @@
-import { Group, TextInput, ActionIcon, Avatar, Text } from "@mantine/core";
-import { FiSearch, FiBell, FiHelpCircle } from "react-icons/fi";
+import { Group, ActionIcon, Avatar, Text, Button } from "@mantine/core";
+import { FiBell, FiHelpCircle, FiLogOut } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 export default function StudentHeader() {
+  const navigate = useNavigate();
+
   return (
     <Group px="md" h="100%" justify="space-between">
       <Group>
@@ -18,6 +21,13 @@ export default function StudentHeader() {
         <ActionIcon variant="subtle">
           <FiHelpCircle />
         </ActionIcon>
+        <Button
+          variant="subtle"
+          leftSection={<FiLogOut />}
+          onClick={() => navigate("/")}
+        >
+          Logout
+        </Button>
       </Group>
     </Group>
   );
