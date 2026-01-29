@@ -15,35 +15,53 @@ import {
 } from "@mantine/core";
 
 import { FiSearch, FiPlus, FiEdit, FiTrash2 } from "react-icons/fi";
-
-const courses = [
-  {
-    code: "CSC101",
-    title: "Introduction to Computer Science",
-    units: 3,
-    level: "100 Level",
-    semester: "1st Semester",
-    type: "Compulsory",
-  },
-  {
-    code: "CSC211",
-    title: "Data Structures and Algorithms",
-    units: 4,
-    level: "200 Level",
-    semester: "1st Semester",
-    type: "Compulsory",
-  },
-  {
-    code: "GST222",
-    title: "Peace and Conflict Studies",
-    units: 2,
-    level: "200 Level",
-    semester: "2nd Semester",
-    type: "Elective",
-  },
-];
+import { useMemo, useState } from "react";
+import { useDisclosure } from "@mantine/hooks";
+import { notifications } from "@mantine/notifications";
+import {
+  useGetCoursesQuery,
+  useDeleteCourseMutation,
+} from "../../services/courseApi";
+import CreateCourseModal from "../../components/courses/CreateCourseModal";
 
 export default function Courses() {
+  const { data: courses } = useGetCoursesQuery();
+  const [deleteCourse, { isLoading: isDeleting }] =
+    useDeleteCourseMutation();
+  const [opened, { open, close }] = useDisclosure(false);
+  const [search, setSearch] = useState("");
+  const [levelFilter, setLevelFilter] = useState("ALL");
+  const [page, setPage] = useState(1);
+  const pageSize = 5;
+
+  const filteredCourses = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    return (courses ?? []).filter((course: any) => {
+      const matchesSearch =
+        !query ||
+        String(course.code).toLowerCase().includes(query) ||
+        String(course.title).toLowerCase().includes(query);
+      const matchesLevel =
+        levelFilter === "ALL" || String(course.level) === levelFilter;
+      return matchesSearch && matchesLevel;
+    });
+  }, [courses, search, levelFilter]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredCourses.length / pageSize));
+  const clampedPage = Math.min(page, totalPages);
+  const startIndex = (clampedPage - 1) * pageSize;
+  const pagedCourses = filteredCourses.slice(startIndex, startIndex + pageSize);
+  const showingStart = filteredCourses.length === 0 ? 0 : startIndex + 1;
+  const showingEnd = Math.min(
+    startIndex + pageSize,
+    filteredCourses.length,
+  );
+
+  const formatSemester = (value: string) =>
+    value === "1" ? "1st Semester" : value === "2" ? "2nd Semester" : value;
+  const formatType = (value: string) =>
+    value === "core" ? "Compulsory" : "Elective";
+
   return (
     <Stack gap="lg">
       {/* Header */}
@@ -56,7 +74,9 @@ export default function Courses() {
           </Text>
         </Box>
 
-        <Button leftSection={<FiPlus size={18} />}>Add New Course</Button>
+        <Button leftSection={<FiPlus size={18} />} onClick={open}>
+          Add New Course
+        </Button>
       </Group>
 
       {/* Toolbar */}
@@ -66,6 +86,11 @@ export default function Courses() {
             placeholder="Search by course code or title..."
             leftSection={<FiSearch size={16} />}
             w={360}
+            value={search}
+            onChange={(event) => {
+              setSearch(event.currentTarget.value);
+              setPage(1);
+            }}
           />
 
           <Group>
@@ -73,8 +98,12 @@ export default function Courses() {
               Filter Level:
             </Text>
             <SegmentedControl
-              data={["ALL", "100", "200", "300", "400"]}
-              defaultValue="ALL"
+              data={["ALL", "100", "200", "300", "400", "500"]}
+              value={levelFilter}
+              onChange={(value) => {
+                setLevelFilter(value);
+                setPage(1);
+              }}
             />
           </Group>
         </Group>
@@ -96,7 +125,7 @@ export default function Courses() {
           </Table.Thead>
 
           <Table.Tbody>
-            {courses.map((course) => (
+            {pagedCourses.map((course: any) => (
               <Table.Tr key={course.code}>
                 <Table.Td>
                   <Text fw={700} c="blue">
@@ -108,16 +137,16 @@ export default function Courses() {
 
                 <Table.Td ta="center">{course.units}</Table.Td>
 
-                <Table.Td>{course.level}</Table.Td>
+                <Table.Td>{course.level} Level</Table.Td>
 
-                <Table.Td>{course.semester}</Table.Td>
+                <Table.Td>{formatSemester(String(course.semester))}</Table.Td>
 
                 <Table.Td>
                   <Badge
                     variant="light"
-                    color={course.type === "Compulsory" ? "blue" : "gray"}
+                    color={course.type === "core" ? "blue" : "gray"}
                   >
-                    {course.type}
+                    {formatType(String(course.type))}
                   </Badge>
                 </Table.Td>
 
@@ -126,7 +155,28 @@ export default function Courses() {
                     <ActionIcon variant="subtle" color="blue">
                       <FiEdit size={18} />
                     </ActionIcon>
-                    <ActionIcon variant="subtle" color="red">
+                    <ActionIcon
+                      variant="subtle"
+                      color="red"
+                      onClick={async () => {
+                        try {
+                          await deleteCourse(course.id).unwrap();
+                          notifications.show({
+                            color: "green",
+                            title: "Course deleted",
+                            message: `${course.code} has been removed.`,
+                          });
+                        } catch (error) {
+                          notifications.show({
+                            color: "red",
+                            title: "Delete failed",
+                            message:
+                              "Unable to delete this course. Please try again.",
+                          });
+                        }
+                      }}
+                      disabled={isDeleting}
+                    >
                       <FiTrash2 size={18} />
                     </ActionIcon>
                   </Group>
@@ -139,12 +189,19 @@ export default function Courses() {
         {/* Footer */}
         <Group justify="space-between" p="md">
           <Text size="sm" c="dimmed">
-            Showing 1 to 5 of 124 courses
+            Showing {showingStart} to {showingEnd} of {filteredCourses.length}{" "}
+            courses
           </Text>
 
-          <Pagination total={5} />
+          <Pagination
+            total={totalPages}
+            value={clampedPage}
+            onChange={setPage}
+          />
         </Group>
       </Paper>
+
+      <CreateCourseModal opened={opened} onClose={close} />
     </Stack>
   );
 }
