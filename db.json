@@ -178,6 +178,136 @@
     "restrictedMinCgpa": 4,
     "maxUnitsPerSemester": 24
   },
+  "results": [
+    {
+      "id": "1",
+      "studentId": "1",
+      "cgpa": 4.21,
+      "totalCredits": 144,
+      "standing": "Good Standing",
+      "classLabel": "Second Class Upper",
+      "classRange": "4.50 – 5.00",
+      "classPercent": 78,
+      "sessions": [
+        {
+          "id": 4,
+          "year": "2022/2023",
+          "level": "400 Level",
+          "gpa": 4.45,
+          "credits": 38,
+          "semestersCompleted": 2
+        },
+        {
+          "id": 3,
+          "year": "2021/2022",
+          "level": "300 Level",
+          "gpa": 4.12,
+          "credits": 42,
+          "semestersCompleted": 2
+        },
+        {
+          "id": 2,
+          "year": "2020/2021",
+          "level": "200 Level",
+          "gpa": 4.38,
+          "credits": 36,
+          "semestersCompleted": 2
+        },
+        {
+          "id": 1,
+          "year": "2019/2020",
+          "level": "100 Level",
+          "gpa": 3.89,
+          "credits": 28,
+          "semestersCompleted": 2
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "studentId": "2",
+      "cgpa": 3.96,
+      "totalCredits": 108,
+      "standing": "Good Standing",
+      "classLabel": "Second Class Upper",
+      "classRange": "3.50 – 4.49",
+      "classPercent": 79,
+      "sessions": [
+        {
+          "id": 3,
+          "year": "2022/2023",
+          "level": "300 Level",
+          "gpa": 4.08,
+          "credits": 36,
+          "semestersCompleted": 2
+        },
+        {
+          "id": 2,
+          "year": "2021/2022",
+          "level": "200 Level",
+          "gpa": 3.92,
+          "credits": 38,
+          "semestersCompleted": 2
+        },
+        {
+          "id": 1,
+          "year": "2020/2021",
+          "level": "100 Level",
+          "gpa": 3.88,
+          "credits": 34,
+          "semestersCompleted": 2
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "studentId": "3",
+      "cgpa": 4.05,
+      "totalCredits": 76,
+      "standing": "Good Standing",
+      "classLabel": "Second Class Upper",
+      "classRange": "3.50 – 4.49",
+      "classPercent": 81,
+      "sessions": [
+        {
+          "id": 2,
+          "year": "2022/2023",
+          "level": "200 Level",
+          "gpa": 4.12,
+          "credits": 38,
+          "semestersCompleted": 2
+        },
+        {
+          "id": 1,
+          "year": "2021/2022",
+          "level": "100 Level",
+          "gpa": 3.98,
+          "credits": 38,
+          "semestersCompleted": 2
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "studentId": "4",
+      "cgpa": 3.42,
+      "totalCredits": 32,
+      "standing": "Probation",
+      "classLabel": "Second Class Lower",
+      "classRange": "2.40 – 3.49",
+      "classPercent": 68,
+      "sessions": [
+        {
+          "id": 1,
+          "year": "2023/2024",
+          "level": "100 Level",
+          "gpa": 3.42,
+          "credits": 32,
+          "semestersCompleted": 2
+        }
+      ]
+    }
+  ],
   "advisors": [
     {
       "id": "1",

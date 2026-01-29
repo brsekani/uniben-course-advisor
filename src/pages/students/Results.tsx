@@ -11,39 +11,24 @@ import {
 } from "@mantine/core";
 import { FiDownload, FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
-
-const sessions = [
-  {
-    id: 4,
-    year: "2022/2023",
-    level: "400 Level",
-    gpa: 4.45,
-    credits: 38,
-  },
-  {
-    id: 3,
-    year: "2021/2022",
-    level: "300 Level",
-    gpa: 4.12,
-    credits: 42,
-  },
-  {
-    id: 2,
-    year: "2020/2021",
-    level: "200 Level",
-    gpa: 4.38,
-    credits: 36,
-  },
-  {
-    id: 1,
-    year: "2019/2020",
-    level: "100 Level",
-    gpa: 3.89,
-    credits: 28,
-  },
-];
+import { useGetResultsQuery } from "../../services/resultsApi";
 
 export default function Results() {
+  const { data: results } = useGetResultsQuery();
+  const userId = localStorage.getItem("userId");
+  const studentResults =
+    results?.find((item: any) => String(item.studentId) === String(userId)) ??
+    results?.[0];
+
+  const sessions = studentResults?.sessions ?? [];
+  const cgpa = Number(studentResults?.cgpa ?? 0);
+  const totalCredits = Number(studentResults?.totalCredits ?? 0);
+  const standing = studentResults?.standing ?? "Good Standing";
+  const classLabel = studentResults?.classLabel ?? "Second Class Upper";
+  const classRange = studentResults?.classRange ?? "4.50 – 5.00";
+  const classPercent =
+    studentResults?.classPercent ?? Math.min(100, Math.round((cgpa / 5) * 100));
+
   return (
     <Stack gap="xl">
       {/* Header */}
@@ -77,7 +62,7 @@ export default function Results() {
             </Text>
 
             <Title order={1}>
-              4.21{" "}
+              {cgpa.toFixed(2)}{" "}
               <Text span size="lg" opacity={0.8}>
                 / 5.00 CGPA
               </Text>
@@ -88,14 +73,14 @@ export default function Results() {
                 <Text size="sm" opacity={0.8}>
                   Total Credits Earned
                 </Text>
-                <Text fw={600}>144 Units</Text>
+                <Text fw={600}>{totalCredits} Units</Text>
               </Stack>
 
               <Stack gap={2}>
                 <Text size="sm" opacity={0.8}>
                   Academic Standing
                 </Text>
-                <Text fw={600}>Good Standing</Text>
+                <Text fw={600}>{standing}</Text>
               </Stack>
             </Group>
           </Stack>
@@ -108,13 +93,13 @@ export default function Results() {
 
             <Group justify="space-between">
               <Text>First Class</Text>
-              <Text c="dimmed">4.50 – 5.00</Text>
+              <Text c="dimmed">{classRange}</Text>
             </Group>
 
-            <Progress value={78} radius="xl" />
+            <Progress value={classPercent} radius="xl" />
 
             <Text size="sm" c="dimmed">
-              You are currently in <b>Second Class Upper</b> division
+              You are currently in <b>{classLabel}</b> division
             </Text>
 
             <Button variant="subtle" size="sm">
@@ -128,12 +113,12 @@ export default function Results() {
       <Group justify="space-between">
         <Text fw={600}>Academic Sessions</Text>
         <Text size="sm" c="dimmed">
-          4 SESSIONS RECORDED
+          {sessions.length} SESSIONS RECORDED
         </Text>
       </Group>
 
       <Stack gap="md">
-        {sessions.map((s) => (
+        {sessions.map((s: any) => (
           <Card
             component={Link}
             to={`${s.id}`}
@@ -150,7 +135,7 @@ export default function Results() {
                 <Stack gap={2}>
                   <Text fw={600}>{s.year} Academic Session</Text>
                   <Text size="sm" c="dimmed">
-                    {s.level} · 2 Semesters Completed
+                    {s.level} • {s.semestersCompleted} Semesters Completed
                   </Text>
                 </Stack>
               </Group>
