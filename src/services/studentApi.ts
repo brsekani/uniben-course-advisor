@@ -6,7 +6,15 @@ export const studentApi = baseApi.injectEndpoints({
       query: () => "/students",
       providesTags: ["Students"],
     }),
+    updateStudent: builder.mutation({
+      query: ({ id, ...student }) => ({
+        url: `/students/${id}`,
+        method: "PATCH",
+        body: student,
+      }),
+      invalidatesTags: ["Students"],
+    }),
   }),
 });
 
-export const { useGetStudentsQuery } = studentApi;
+export const { useGetStudentsQuery, useUpdateStudentMutation } = studentApi;

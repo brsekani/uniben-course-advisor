@@ -5,11 +5,19 @@
       "name": "Osasumwen Ighodaro",
       "matric": "SCI1708945",
       "email": "osas@example.com",
-      "password": "123456",
-      "level": "400 Level",
+      "password": "111111",
+      "level": "400",
       "department": "Computer Science",
       "cgpa": 4.21,
-      "role": "student"
+      "role": "student",
+      "status": "Active",
+      "dob": "May 15, 1999",
+      "gender": "Male",
+      "phone": "+234 802 345 6789",
+      "personalEmail": "osas.ighodaro@example.com",
+      "faculty": "Faculting of Computing",
+      "studyMode": "Full-Time",
+      "entryYear": "2017"
     },
     {
       "id": "2",
@@ -17,10 +25,18 @@
       "matric": "SCI1902371",
       "email": "efe.osawe@example.com",
       "password": "student123",
-      "level": "300 Level",
+      "level": "300",
       "department": "Computer Science",
       "cgpa": 3.78,
-      "role": "student"
+      "role": "student",
+      "status": "Active",
+      "dob": "August 09, 2000",
+      "gender": "Female",
+      "phone": "+234 813 104 5562",
+      "personalEmail": "efe.osawe@example.com",
+      "faculty": "Faculting of Computing",
+      "studyMode": "Full-Time",
+      "entryYear": "2018"
     },
     {
       "id": "3",
@@ -28,10 +44,18 @@
       "matric": "SCI2001142",
       "email": "iseosa.aigbe@example.com",
       "password": "student123",
-      "level": "200 Level",
+      "level": "200",
       "department": "Computer Science",
       "cgpa": 4.02,
-      "role": "student"
+      "role": "student",
+      "status": "Active",
+      "dob": "January 22, 2001",
+      "gender": "Female",
+      "phone": "+234 703 112 8890",
+      "personalEmail": "iseosa.aigbe@example.com",
+      "faculty": "Faculting of Computing",
+      "studyMode": "Full-Time",
+      "entryYear": "2019"
     },
     {
       "id": "4",
@@ -39,10 +63,18 @@
       "matric": "SCI2103889",
       "email": "osayande.eghosa@example.com",
       "password": "student123",
-      "level": "100 Level",
+      "level": "100",
       "department": "Computer Science",
       "cgpa": 3.42,
-      "role": "student"
+      "role": "student",
+      "status": "Inactive",
+      "dob": "November 03, 2002",
+      "gender": "Male",
+      "phone": "+234 809 884 1123",
+      "personalEmail": "osayande.eghosa@example.com",
+      "faculty": "Faculting of Computing",
+      "studyMode": "Full-Time",
+      "entryYear": "2021"
     }
   ],
   "submissions": [
@@ -157,7 +189,8 @@
       "role": "advisor",
       "status": "Active",
       "level": "200",
-      "students": 0
+      "title": "Senior Lecturer • Staff Adviser",
+      "office": "Block C, Room 402, Faculty of Physical Sciences"
     },
     {
       "id": "2",
@@ -168,7 +201,22 @@
       "department": "Computer Science",
       "role": "advisor",
       "status": "Active",
-      "level": "300"
+      "level": "300",
+      "title": "Lecturer I • Staff Adviser",
+      "office": "Block B, Room 215, Faculty of Physical Sciences"
+    },
+    {
+      "id": "3",
+      "name": "Ehimwenma Osayande",
+      "staffId": "ADV/CS/003",
+      "email": "osayande.ehimwenma@uniben.edu",
+      "password": "advisor123",
+      "department": "Computer Science",
+      "role": "advisor",
+      "status": "Active",
+      "level": "400",
+      "title": "Senior Lecturer • Staff Adviser",
+      "office": "Block A, Room 118, Faculty of Computing"
     }
   ],
   "admins": [
