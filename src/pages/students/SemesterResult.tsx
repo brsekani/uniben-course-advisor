@@ -12,6 +12,8 @@ import {
 import { FiArrowLeft, FiDownload, FiPrinter } from "react-icons/fi";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetResultsQuery } from "../../services/resultsApi";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const gradeColor = (grade: string) => {
   switch (grade) {
@@ -52,6 +54,40 @@ export default function SemesterResult() {
     semester?.credits ??
     courses.reduce((sum: number, c: any) => sum + Number(c.units ?? 0), 0);
   const semesterGpa = semester?.gpa ?? 0;
+  const sessionYear = session?.year ?? "Session";
+  const semesterName = semester?.name ?? "Semester";
+
+  const handleExportPdf = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text("UNIBEN Academic Results", 14, 18);
+
+    doc.setFontSize(12);
+    doc.text(`${sessionYear} • ${semesterName}`, 14, 28);
+    doc.text(`Credits Earned: ${creditsEarned.toFixed(1)}`, 14, 36);
+    doc.text(`Semester GPA: ${Number(semesterGpa).toFixed(2)}`, 14, 44);
+
+    const tableRows = courses.map((c: any) => [
+      c.code,
+      c.title,
+      Number(c.units).toFixed(1),
+      c.grade,
+      Number(c.point).toFixed(1),
+    ]);
+
+    autoTable(doc, {
+      head: [["Course Code", "Course Title", "Units", "Grade", "Grade Point"]],
+      body: tableRows,
+      startY: 52,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [28, 126, 214] },
+    });
+
+    const fileSafeName = `${sessionYear}-${semesterName}`
+      .replace(/\s+/g, "_")
+      .replace(/[^\w-]/g, "");
+    doc.save(`${fileSafeName}_results.pdf`);
+  };
 
   return (
     <Stack gap="xl">
@@ -66,10 +102,18 @@ export default function SemesterResult() {
         </Button>
 
         <Group>
-          <Button variant="light" leftSection={<FiDownload />}>
+          <Button
+            variant="light"
+            leftSection={<FiDownload />}
+            onClick={handleExportPdf}
+          >
             Export as PDF
           </Button>
-          <Button variant="light" leftSection={<FiPrinter />}>
+          <Button
+            variant="light"
+            leftSection={<FiPrinter />}
+            onClick={() => window.print()}
+          >
             Print
           </Button>
         </Group>
