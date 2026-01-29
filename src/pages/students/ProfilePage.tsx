@@ -26,10 +26,16 @@ import {
   useUpdateStudentMutation,
 } from "../../services/studentApi";
 import { useGetAdvisorsQuery } from "../../services/advisorApi";
+import { useGetSelectionQuery } from "../../services/selectionApi";
+import { useGetSettingsQuery } from "../../services/settingsApi";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 export default function ProfilePage() {
   const { data: students } = useGetStudentsQuery();
   const { data: advisors } = useGetAdvisorsQuery();
+  const { data: selections } = useGetSelectionQuery();
+  const { data: settings } = useGetSettingsQuery();
   const [updateStudent, { isLoading: isUpdating }] =
     useUpdateStudentMutation();
 
@@ -55,6 +61,105 @@ export default function ProfilePage() {
     const yr = Number(match[0]);
     if (Number.isNaN(yr)) return "";
     return yr >= 80 ? `19${match[0]}` : `20${match[0]}`;
+  };
+  const semesterLabel = (value?: string) => {
+    const normalized = String(value ?? "").trim().toLowerCase();
+    if (normalized === "1" || normalized.startsWith("first")) return "First";
+    if (normalized === "2" || normalized.startsWith("second")) return "Second";
+    return value ?? "N/A";
+  };
+
+  const selectedCourses = (() => {
+    const all = selections ?? [];
+    const hasStudentScope = all.some((item: any) => item.studentId);
+    if (!hasStudentScope) return all;
+    return all.filter(
+      (item: any) => String(item.studentId) === String(student?.id),
+    );
+  })();
+  const totalUnits = selectedCourses.reduce(
+    (sum: number, item: any) => sum + Number(item.units ?? 0),
+    0,
+  );
+
+  const handlePrintCourseForm = () => {
+    if (!student?.id) {
+      notifications.show({
+        color: "red",
+        title: "Student not found",
+        message: "Unable to load your profile details for printing.",
+      });
+      return;
+    }
+    if (selectedCourses.length === 0) {
+      notifications.show({
+        color: "red",
+        title: "No courses selected",
+        message: "Please add courses before printing the form.",
+      });
+      return;
+    }
+
+    const doc = new jsPDF();
+    const session = settings?.currentSession ?? "2023/2024";
+    const semester = settings?.currentSemester ?? "First";
+    const today = new Date().toLocaleDateString();
+
+    doc.setFontSize(16);
+    doc.text("UNIBEN Course Registration Form", 14, 18);
+    doc.setFontSize(11);
+    doc.text(`Session: ${session}`, 14, 28);
+    doc.text(`Semester: ${semester}`, 14, 34);
+    doc.text(`Date: ${today}`, 14, 40);
+
+    const detailsLeft = [
+      `Name: ${student?.name ?? "N/A"}`,
+      `Matric Number: ${student?.matric ?? "N/A"}`,
+      `Level: ${student?.level ?? "N/A"}`,
+      `Program: ${student?.program ?? "N/A"}`,
+    ];
+    const detailsRight = [
+      `Department: ${student?.department ?? "N/A"}`,
+      `Faculty: ${student?.faculty ?? fallbackFaculty}`,
+      `Entry Year: ${student?.entryYear ?? deriveEntryYear(student?.matric)}`,
+      `Adviser: ${adviser?.name ?? "N/A"}`,
+    ];
+
+    detailsLeft.forEach((line, index) => {
+      doc.text(line, 14, 52 + index * 6);
+    });
+    detailsRight.forEach((line, index) => {
+      doc.text(line, 110, 52 + index * 6);
+    });
+
+    const tableRows = selectedCourses.map((c: any, index: number) => [
+      String(index + 1),
+      c.code,
+      c.title,
+      String(c.units ?? ""),
+      c.type ?? "",
+      semesterLabel(c.semester),
+    ]);
+
+    autoTable(doc, {
+      head: [["S/N", "Course Code", "Course Title", "Units", "Type", "Semester"]],
+      body: tableRows,
+      startY: 82,
+      styles: { fontSize: 10 },
+      headStyles: { fillColor: [28, 126, 214] },
+    });
+
+    const finalY =
+      (doc as any).lastAutoTable?.finalY ? (doc as any).lastAutoTable.finalY : 82;
+    doc.setFontSize(11);
+    doc.text(`Total Units: ${totalUnits}`, 14, finalY + 8);
+    doc.text("Student Signature: ____________________", 14, finalY + 18);
+    doc.text("Adviser Signature: ____________________", 110, finalY + 18);
+
+    const fileSafeName = `${student?.matric ?? "student"}_${session}_${semester}`
+      .replace(/\s+/g, "_")
+      .replace(/[^\w-]/g, "");
+    doc.save(`${fileSafeName}_course_form.pdf`);
   };
 
   const handlePasswordUpdate = async () => {
@@ -134,7 +239,10 @@ export default function ProfilePage() {
             </Stack>
           </Group>
 
-          <Button leftSection={<FiPrinter size={16} />}>
+          <Button
+            leftSection={<FiPrinter size={16} />}
+            onClick={handlePrintCourseForm}
+          >
             Print Course Form
           </Button>
         </Group>

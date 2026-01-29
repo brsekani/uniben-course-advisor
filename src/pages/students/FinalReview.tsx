@@ -57,7 +57,7 @@ export default function FinalCourseReview() {
     useAddSubmissionMutation();
   const [updateSubmission, { isLoading: isUpdatingSubmission }] =
     useUpdateSubmissionMutation();
-  const [addCourse, { isLoading: isAddingCourse }] = useAddCourseMutation();
+  const [addCourse] = useAddCourseMutation();
   const [removeCourse, { isLoading: isRemovingCourse }] =
     useRemoveCourseMutation();
   const [confirmed, setConfirmed] = useState(false);
@@ -495,25 +495,9 @@ export default function FinalCourseReview() {
               </Title>
               <Stack gap="sm">
                 {suggestedCourses.slice(0, 5).map((course: any) => (
-                  <Group key={course.code} justify="space-between">
-                    <Text size="sm">
-                      {course.code} - {course.title}
-                    </Text>
-                    <Button
-                      size="xs"
-                      variant="light"
-                      loading={isAddingCourse}
-                      onClick={async () => {
-                        const { id: _id, ...payload } = course;
-                        await addCourse({
-                          ...payload,
-                          studentId: String(student?.id),
-                        }).unwrap();
-                      }}
-                    >
-                      Add
-                    </Button>
-                  </Group>
+                  <Text key={course.code} size="sm">
+                    {course.code} - {course.title}
+                  </Text>
                 ))}
                 {suggestedCourses.length === 0 && (
                   <Text size="sm" c="dimmed">
