@@ -18,7 +18,9 @@
       "faculty": "Faculting of Computing",
       "studyMode": "Full-Time",
       "entryYear": "2017",
-      "program": "B.Sc Computer Science"
+      "program": "B.Sc Computer Science",
+      "carryOvers": ["MTH202"],
+      "completedCourses": ["CSC201", "CSC203", "CSC205", "CSC207", "MTH201", "GST201"]
     },
     {
       "id": "2",
@@ -38,7 +40,9 @@
       "faculty": "Faculting of Computing",
       "studyMode": "Full-Time",
       "entryYear": "2018",
-      "program": "B.Sc Computer Science"
+      "program": "B.Sc Computer Science",
+      "carryOvers": [],
+      "completedCourses": ["CSC201", "CSC203", "CSC205", "CSC207", "MTH201", "GST201"]
     },
     {
       "id": "3",
@@ -58,7 +62,9 @@
       "faculty": "Faculting of Computing",
       "studyMode": "Full-Time",
       "entryYear": "2019",
-      "program": "B.Sc Computer Science"
+      "program": "B.Sc Computer Science",
+      "carryOvers": ["PHY102"],
+      "completedCourses": ["CSC101", "MTH101", "PHY101", "GST101", "CHM101", "GST103"]
     },
     {
       "id": "4",
@@ -78,7 +84,9 @@
       "faculty": "Faculting of Computing",
       "studyMode": "Full-Time",
       "entryYear": "2021",
-      "program": "B.Sc Computer Science"
+      "program": "B.Sc Computer Science",
+      "carryOvers": ["PHY102", "MTH102"],
+      "completedCourses": ["CSC101", "MTH101", "PHY101", "GST101", "CHM101"]
     }
   ],
   "submissions": [
@@ -211,7 +219,14 @@
     "maxUnitsPerSemester": 24,
     "advisingWindowOpen": true,
     "registrationEndsInDays": 3,
-    "advisingDeadline": "March 15, 2026"
+    "advisingDeadline": "March 15, 2026",
+    "currentSession": "2023/2024",
+    "currentSemester": "First",
+    "advisingRules": {
+      "minUnits": 15,
+      "maxUnits": 24,
+      "minElectives": 1
+    }
   },
   "results": [
     {

@@ -6,7 +6,27 @@ export const submissionApi = baseApi.injectEndpoints({
       query: () => "/submissions",
       providesTags: ["Submissions"],
     }),
+    addSubmission: builder.mutation({
+      query: (submission) => ({
+        url: "/submissions",
+        method: "POST",
+        body: submission,
+      }),
+      invalidatesTags: ["Submissions"],
+    }),
+    updateSubmission: builder.mutation({
+      query: ({ id, ...submission }) => ({
+        url: `/submissions/${id}`,
+        method: "PATCH",
+        body: submission,
+      }),
+      invalidatesTags: ["Submissions"],
+    }),
   }),
 });
 
-export const { useGetSubmissionsQuery } = submissionApi;
+export const {
+  useGetSubmissionsQuery,
+  useAddSubmissionMutation,
+  useUpdateSubmissionMutation,
+} = submissionApi;
