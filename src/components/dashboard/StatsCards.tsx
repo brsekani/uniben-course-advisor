@@ -1,7 +1,22 @@
 import { Grid, Card, Text, Group } from "@mantine/core";
-import { FiUsers, FiBook } from "react-icons/fi";
+import { FiUsers, FiBook, FiClock } from "react-icons/fi";
+import { useGetStudentsQuery } from "../../services/studentApi";
+import { useGetAdvisorsQuery } from "../../services/advisorApi";
+import { useGetCoursesQuery } from "../../services/courseApi";
+import { useGetSubmissionsQuery } from "../../services/submissionApi";
 
 export default function StatsCards() {
+  const { data: students } = useGetStudentsQuery();
+  const { data: advisors } = useGetAdvisorsQuery();
+  const { data: courses } = useGetCoursesQuery();
+  const { data: submissions } = useGetSubmissionsQuery();
+
+  const totalStudents = students?.length ?? 0;
+  const totalAdvisors = advisors?.length ?? 0;
+  const totalCourses = courses?.length ?? 0;
+  const pendingSubmissions =
+    submissions?.filter((item: any) => item.status === "pending").length ?? 0;
+
   return (
     <Grid>
       <Grid.Col span={3}>
@@ -12,7 +27,7 @@ export default function StatsCards() {
                 Total Students
               </Text>
               <Text fw={700} size="xl">
-                12,450
+                {totalStudents}
               </Text>
             </div>
             <FiUsers size={24} />
@@ -28,7 +43,7 @@ export default function StatsCards() {
                 Total Advisers
               </Text>
               <Text fw={700} size="xl">
-                45
+                {totalAdvisors}
               </Text>
             </div>
             <FiBook size={24} />
@@ -44,7 +59,7 @@ export default function StatsCards() {
                 Active Courses
               </Text>
               <Text fw={700} size="xl">
-                45
+                {totalCourses}
               </Text>
             </div>
             <FiBook size={24} />
@@ -60,10 +75,10 @@ export default function StatsCards() {
                 Pending Submission
               </Text>
               <Text fw={700} size="xl">
-                45
+                {pendingSubmissions}
               </Text>
             </div>
-            <FiBook size={24} />
+            <FiClock size={24} />
           </Group>
         </Card>
       </Grid.Col>

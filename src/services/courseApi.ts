@@ -6,7 +6,15 @@ export const courseApi = baseApi.injectEndpoints({
       query: () => "/courses",
       providesTags: ["Courses"],
     }),
+    addCourse: builder.mutation({
+      query: (course) => ({
+        url: "/courses",
+        method: "POST",
+        body: course,
+      }),
+      invalidatesTags: ["Courses"],
+    }),
   }),
 });
 
-export const { useGetCoursesQuery } = courseApi;
+export const { useGetCoursesQuery, useAddCourseMutation } = courseApi;
