@@ -1,4 +1,3 @@
-// src/pages/student/Dashboard.tsx
 import {
   Stack,
   Group,
@@ -8,51 +7,86 @@ import {
   Avatar,
   Button,
   Progress,
-  Divider,
   Badge,
   SimpleGrid,
 } from "@mantine/core";
-import {
-  FiArrowRight,
-  FiBookOpen,
-  FiClock,
-  FiAlertCircle,
-  FiCheckCircle,
-} from "react-icons/fi";
+import { FiArrowRight, FiBookOpen, FiClock, FiAlertCircle } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useGetStudentsQuery } from "../../services/studentApi";
-
-const submissionStatus = {
-  status: "not_started", // not_started | in_review | approved
-  progress: 0,
-};
+import { useGetSubmissionsQuery } from "../../services/submissionApi";
+import { useGetSettingsQuery } from "../../services/settingsApi";
 
 export default function StudentDashboard() {
-  const { data, isLoading, error } = useGetStudentsQuery();
-  console.log(data);
+  const { data: students, isLoading, error } = useGetStudentsQuery();
+  const { data: submissions } = useGetSubmissionsQuery();
+  const { data: settings } = useGetSettingsQuery();
 
   if (isLoading) return <Text>Loading dashboard...</Text>;
   if (error) return <Text>Error loading student data</Text>;
 
-  const student = data?.[0];
+  const userId = localStorage.getItem("userId");
+  const student =
+    students?.find((item: any) => String(item.id) === String(userId)) ??
+    students?.[0];
+  const submission =
+    submissions?.find(
+      (item: any) => String(item.studentId) === String(student?.id),
+    ) ?? submissions?.[0];
+
+  const status = submission?.status ?? "not_started";
+  const statusProgress =
+    status === "approved" ? 100 : status === "in_review" ? 60 : 0;
+  const statusLabel =
+    status === "approved"
+      ? "Approved"
+      : status === "in_review"
+        ? "In Review"
+        : "Not Started";
+  const advisorStatusLabel =
+    status === "approved"
+      ? "Approved"
+      : status === "in_review"
+        ? "Awaiting Adviser"
+        : "Awaiting Submission";
+
+  const registeredUnits = submission?.units ?? 0;
+  const requiredUnits = settings?.maxUnitsPerSemester ?? 24;
+  const deadlineDays = settings?.registrationEndsInDays ?? 3;
+  const deadlineDate = settings?.advisingDeadline ?? "March 15, 2026";
+  const advisingOpen = settings?.advisingWindowOpen ?? true;
+
+  const initials = String(student?.name ?? "Student")
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase())
+    .join("");
+
+  const actionLink =
+    status === "not_started"
+      ? "/student/advising"
+      : status === "in_review"
+        ? "/student/advising/review"
+        : "/student/results";
 
   return (
     <Stack gap="xl">
       {/* Welcome Card */}
       <Card withBorder radius="lg" p="lg">
         <Group>
-          <Avatar
-            size={90}
-            radius="xl"
-            src="https://i.pravatar.cc/150?img=12"
-          />
+          <Avatar size={90} radius="xl">
+            {initials}
+          </Avatar>
 
           <Stack gap={4}>
-            <Title order={3}>Welcome back, {student.name}</Title>
+            <Title order={3}>Welcome back, {student?.name ?? "Student"}</Title>
 
             <Group gap="xs">
-              <Badge variant="light">{student.matric}</Badge>
-              <Text c="dimmed">Computer Science · {student.level}</Text>
+              <Badge variant="light">{student?.matric ?? "N/A"}</Badge>
+              <Text c="dimmed">
+                {student?.department ?? "Department"} ·{" "}
+                {student?.level ?? "Level"}
+              </Text>
             </Group>
           </Stack>
         </Group>
@@ -64,14 +98,14 @@ export default function StudentDashboard() {
           <Text c="dimmed" size="sm">
             Registered Units
           </Text>
-          <Title order={3}>0</Title>
+          <Title order={3}>{registeredUnits}</Title>
         </Card>
 
         <Card withBorder radius="lg">
           <Text c="dimmed" size="sm">
             Required Units
           </Text>
-          <Title order={3}>24</Title>
+          <Title order={3}>{requiredUnits}</Title>
         </Card>
 
         <Card withBorder radius="lg">
@@ -79,7 +113,7 @@ export default function StudentDashboard() {
             Adviser Status
           </Text>
           <Badge color="orange" variant="light">
-            Awaiting Submission
+            {advisorStatusLabel}
           </Badge>
         </Card>
       </SimpleGrid>
@@ -93,25 +127,25 @@ export default function StudentDashboard() {
             </Avatar>
 
             <Text c="dimmed" ta="center" maw={420}>
-              {submissionStatus.status === "not_started"
+              {status === "not_started"
                 ? "You have not started your course advising for this semester."
-                : "Your submission is currently being reviewed by your adviser."}
+                : status === "in_review"
+                  ? "Your submission is currently being reviewed by your adviser."
+                  : "Your submission has been approved."}
             </Text>
 
             <Button
               component={Link}
-              to={
-                submissionStatus.status === "not_started"
-                  ? "/student/advising"
-                  : `/student/advising/${submissionStatus.id}`
-              }
+              to={actionLink}
               size="md"
               radius="md"
               rightSection={<FiArrowRight />}
             >
-              {submissionStatus.status === "not_started"
+              {status === "not_started"
                 ? "Start Course Advising"
-                : "Continue Submission"}
+                : status === "in_review"
+                  ? "View Submission"
+                  : "View Results"}
             </Button>
           </Stack>
         </Card>
@@ -127,17 +161,17 @@ export default function StudentDashboard() {
             <Stack gap="sm">
               <Group justify="space-between">
                 <Text c="dimmed">Academic Level</Text>
-                <Text fw={600}>400 Level (Finalist)</Text>
+                <Text fw={600}>{student?.level ?? "Level"}</Text>
               </Group>
 
               <Group justify="space-between">
                 <Text c="dimmed">Program</Text>
-                <Text fw={600}>B.Sc Computer Science</Text>
+                <Text fw={600}>{student?.program ?? "Program"}</Text>
               </Group>
 
               <Group justify="space-between">
                 <Text c="dimmed">CGPA</Text>
-                <Text fw={700}>{student.cgpa} / 5.00</Text>
+                <Text fw={700}>{student?.cgpa ?? 0} / 5.00</Text>
               </Group>
             </Stack>
           </Card>
@@ -150,14 +184,15 @@ export default function StudentDashboard() {
             </Group>
 
             <Text size="sm">
-              Course advising closes in <b>3 days</b>. Late submissions may not
-              be approved.
+              {advisingOpen
+                ? `Course advising closes in ${deadlineDays} days. Late submissions may not be approved.`
+                : "Course advising is currently closed."}
             </Text>
 
             <Group gap="xs" mt="sm">
               <FiClock size={14} />
               <Text size="sm" c="dimmed">
-                Deadline: March 15, 2026
+                Deadline: {deadlineDate}
               </Text>
             </Group>
           </Card>
@@ -171,35 +206,35 @@ export default function StudentDashboard() {
             <Title order={5}>Submission Progress</Title>
             <Badge
               color={
-                submissionStatus.status === "approved"
+                status === "approved"
                   ? "green"
-                  : submissionStatus.status === "in_review"
+                  : status === "in_review"
                     ? "blue"
                     : "gray"
               }
             >
-              {submissionStatus.status.replace("_", " ")}
+              {statusLabel}
             </Badge>
           </Group>
 
-          <Progress value={submissionStatus.progress} radius="xl" />
+          <Progress value={statusProgress} radius="xl" />
 
           <Group justify="space-between" mt="sm">
             <Badge
               color="blue"
-              variant={submissionStatus.progress >= 0 ? "filled" : "light"}
+              variant={statusProgress >= 0 ? "filled" : "light"}
             >
               Preparation
             </Badge>
             <Badge
               color="blue"
-              variant={submissionStatus.progress >= 50 ? "filled" : "light"}
+              variant={statusProgress >= 50 ? "filled" : "light"}
             >
               Review
             </Badge>
             <Badge
               color="green"
-              variant={submissionStatus.progress === 100 ? "filled" : "light"}
+              variant={statusProgress === 100 ? "filled" : "light"}
             >
               Approval
             </Badge>

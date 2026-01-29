@@ -17,7 +17,8 @@
       "personalEmail": "osas.ighodaro@example.com",
       "faculty": "Faculting of Computing",
       "studyMode": "Full-Time",
-      "entryYear": "2017"
+      "entryYear": "2017",
+      "program": "B.Sc Computer Science"
     },
     {
       "id": "2",
@@ -36,7 +37,8 @@
       "personalEmail": "efe.osawe@example.com",
       "faculty": "Faculting of Computing",
       "studyMode": "Full-Time",
-      "entryYear": "2018"
+      "entryYear": "2018",
+      "program": "B.Sc Computer Science"
     },
     {
       "id": "3",
@@ -55,7 +57,8 @@
       "personalEmail": "iseosa.aigbe@example.com",
       "faculty": "Faculting of Computing",
       "studyMode": "Full-Time",
-      "entryYear": "2019"
+      "entryYear": "2019",
+      "program": "B.Sc Computer Science"
     },
     {
       "id": "4",
@@ -74,17 +77,46 @@
       "personalEmail": "osayande.eghosa@example.com",
       "faculty": "Faculting of Computing",
       "studyMode": "Full-Time",
-      "entryYear": "2021"
+      "entryYear": "2021",
+      "program": "B.Sc Computer Science"
     }
   ],
   "submissions": [
     {
       "id": "1",
-      "studentId": 1,
+      "studentId": "1",
+      "session": "2023/2024",
+      "semester": "First",
+      "status": "in_review",
+      "units": 21,
+      "submittedAt": "2026-01-27T09:12:00.000Z"
+    },
+    {
+      "id": "2",
+      "studentId": "2",
+      "session": "2023/2024",
+      "semester": "First",
+      "status": "approved",
+      "units": 24,
+      "submittedAt": "2026-01-25T11:40:00.000Z"
+    },
+    {
+      "id": "3",
+      "studentId": "3",
       "session": "2023/2024",
       "semester": "First",
       "status": "not_started",
-      "units": 0
+      "units": 0,
+      "submittedAt": null
+    },
+    {
+      "id": "4",
+      "studentId": "4",
+      "session": "2023/2024",
+      "semester": "First",
+      "status": "in_review",
+      "units": 18,
+      "submittedAt": "2026-01-28T14:30:00.000Z"
     }
   ],
   "courses": [
@@ -176,7 +208,10 @@
   ],
   "settings": {
     "restrictedMinCgpa": 4,
-    "maxUnitsPerSemester": 24
+    "maxUnitsPerSemester": 24,
+    "advisingWindowOpen": true,
+    "registrationEndsInDays": 3,
+    "advisingDeadline": "March 15, 2026"
   },
   "results": [
     {
