@@ -9,7 +9,8 @@
       "level": "400 Level",
       "department": "Computer Science",
       "cgpa": 4.21,
-      "role": "student"
+      "role": "student",
+      "status": "Active"
     },
     {
       "id": "2",
@@ -20,7 +21,8 @@
       "level": "300 Level",
       "department": "Computer Science",
       "cgpa": 3.78,
-      "role": "student"
+      "role": "student",
+      "status": "Active"
     },
     {
       "id": "3",
@@ -31,7 +33,8 @@
       "level": "200 Level",
       "department": "Computer Science",
       "cgpa": 4.02,
-      "role": "student"
+      "role": "student",
+      "status": "Active"
     },
     {
       "id": "4",
@@ -42,7 +45,8 @@
       "level": "100 Level",
       "department": "Computer Science",
       "cgpa": 3.42,
-      "role": "student"
+      "role": "student",
+      "status": "Inactive"
     }
   ],
   "submissions": [

@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import {
   Box,
   Title,
@@ -22,38 +23,75 @@ import {
   FiMoreVertical,
   FiFilter,
 } from "react-icons/fi";
-
-const students = [
-  {
-    initials: "JD",
-    name: "John Doe",
-    matric: "CSC/2021/045",
-    email: "j.doe@uniben.edu",
-    level: "200 Level",
-    department: "Computer Science",
-    status: "Active",
-  },
-  {
-    initials: "AM",
-    name: "Amina Musa",
-    matric: "CSC/2020/112",
-    email: "a.musa@uniben.edu",
-    level: "300 Level",
-    department: "Computer Science",
-    status: "Active",
-  },
-  {
-    initials: "BO",
-    name: "Bisi Ojo",
-    matric: "CSC/2019/078",
-    email: "b.ojo@uniben.edu",
-    level: "400 Level",
-    department: "Computer Science",
-    status: "Inactive",
-  },
-];
+import { useGetStudentsQuery } from "../../services/studentApi";
 
 export default function Student() {
+  const { data: students } = useGetStudentsQuery();
+  const [search, setSearch] = useState("");
+  const [levelFilter, setLevelFilter] = useState<string | null>("ALL");
+  const [statusFilter, setStatusFilter] = useState<string | null>("ALL");
+  const [page, setPage] = useState(1);
+  const pageSize = 10;
+
+  const normalizedStudents = useMemo(
+    () =>
+      (students ?? []).map((student: any) => ({
+        ...student,
+        status: student.status ?? "Active",
+      })),
+    [students],
+  );
+
+  const filteredStudents = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    return normalizedStudents.filter((student: any) => {
+      const matchesSearch =
+        !query ||
+        String(student.name).toLowerCase().includes(query) ||
+        String(student.matric).toLowerCase().includes(query) ||
+        String(student.email).toLowerCase().includes(query);
+      const matchesLevel =
+        !levelFilter ||
+        levelFilter === "ALL" ||
+        String(student.level).startsWith(levelFilter);
+      const matchesStatus =
+        !statusFilter ||
+        statusFilter === "ALL" ||
+        String(student.status).toLowerCase() ===
+          String(statusFilter).toLowerCase();
+      return matchesSearch && matchesLevel && matchesStatus;
+    });
+  }, [normalizedStudents, search, levelFilter, statusFilter]);
+
+  const totalStudents = normalizedStudents.length;
+  const activeStudents = normalizedStudents.filter(
+    (student: any) => String(student.status).toLowerCase() === "active",
+  ).length;
+  const inactiveStudents = normalizedStudents.filter(
+    (student: any) => String(student.status).toLowerCase() !== "active",
+  ).length;
+
+  const totalPages = Math.max(1, Math.ceil(filteredStudents.length / pageSize));
+  const clampedPage = Math.min(page, totalPages);
+  const startIndex = (clampedPage - 1) * pageSize;
+  const pagedStudents = filteredStudents.slice(
+    startIndex,
+    startIndex + pageSize,
+  );
+  const showingStart = filteredStudents.length === 0 ? 0 : startIndex + 1;
+  const showingEnd = Math.min(
+    startIndex + pageSize,
+    filteredStudents.length,
+  );
+
+  const getInitials = (name?: string) =>
+    String(name ?? "")
+      .split(" ")
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0]?.toUpperCase())
+      .join("") || "U";
+
   return (
     <Stack gap="xl">
       {/* Page Title */}
@@ -64,9 +102,9 @@ export default function Student() {
 
       {/* Stats */}
       <Group grow>
-        <StatCard label="Total Students" value="1,240" />
-        <StatCard label="Active Students" value="1,150" />
-        <StatCard label="Inactive Students" value="90" />
+        <StatCard label="Total Students" value={String(totalStudents)} />
+        <StatCard label="Active Students" value={String(activeStudents)} />
+        <StatCard label="Inactive Students" value={String(inactiveStudents)} />
       </Group>
 
       {/* Table */}
@@ -79,6 +117,11 @@ export default function Student() {
                 placeholder="Search by name, matric number or email..."
                 leftSection={<FiSearch size={16} />}
                 w={320}
+                value={search}
+                onChange={(event) => {
+                  setSearch(event.currentTarget.value);
+                  setPage(1);
+                }}
               />
               <Button variant="default" leftSection={<FiFilter size={16} />}>
                 Filters
@@ -87,12 +130,33 @@ export default function Student() {
 
             <Group>
               <Select
-                data={["All Levels", "100", "200", "300", "400"]}
+                data={[
+                  { label: "All Levels", value: "ALL" },
+                  { label: "100", value: "100" },
+                  { label: "200", value: "200" },
+                  { label: "300", value: "300" },
+                  { label: "400", value: "400" },
+                  { label: "500", value: "500" },
+                ]}
                 placeholder="Level"
+                value={levelFilter}
+                onChange={(value) => {
+                  setLevelFilter(value);
+                  setPage(1);
+                }}
               />
               <Select
-                data={["All", "Active", "Inactive"]}
+                data={[
+                  { label: "All", value: "ALL" },
+                  { label: "Active", value: "Active" },
+                  { label: "Inactive", value: "Inactive" },
+                ]}
                 placeholder="Status"
+                value={statusFilter}
+                onChange={(value) => {
+                  setStatusFilter(value);
+                  setPage(1);
+                }}
               />
               <Button leftSection={<FiUpload size={16} />}>
                 Import Students
@@ -114,11 +178,11 @@ export default function Student() {
             </Table.Thead>
 
             <Table.Tbody>
-              {students.map((student) => (
+              {pagedStudents.map((student: any) => (
                 <Table.Tr key={student.matric}>
                   <Table.Td>
                     <Group>
-                      <Avatar radius="xl">{student.initials}</Avatar>
+                      <Avatar radius="xl">{getInitials(student.name)}</Avatar>
                       <Box>
                         <Text fw={600}>{student.name}</Text>
                         <Text size="xs" c="dimmed">
@@ -143,12 +207,20 @@ export default function Student() {
                       <Box
                         w={6}
                         h={6}
-                        bg={student.status === "Active" ? "green" : "gray"}
+                        bg={
+                          String(student.status).toLowerCase() === "active"
+                            ? "green"
+                            : "gray"
+                        }
                         style={{ borderRadius: "50%" }}
                       />
                       <Text
                         size="sm"
-                        c={student.status === "Active" ? "green" : "dimmed"}
+                        c={
+                          String(student.status).toLowerCase() === "active"
+                            ? "green"
+                            : "dimmed"
+                        }
                       >
                         {student.status}
                       </Text>
@@ -168,9 +240,14 @@ export default function Student() {
           {/* Footer */}
           <Group justify="space-between">
             <Text size="sm" c="dimmed">
-              Showing 1–10 of 1,240 students
+              Showing {showingStart}–{showingEnd} of {filteredStudents.length}{" "}
+              students
             </Text>
-            <Pagination total={5} />
+            <Pagination
+              total={totalPages}
+              value={clampedPage}
+              onChange={setPage}
+            />
           </Group>
         </Stack>
       </Paper>
