@@ -10,6 +10,39 @@
       "department": "Computer Science",
       "cgpa": 4.21,
       "role": "student"
+    },
+    {
+      "id": "2",
+      "name": "Efe Osawe",
+      "matric": "SCI1902371",
+      "email": "efe.osawe@example.com",
+      "password": "student123",
+      "level": "300 Level",
+      "department": "Computer Science",
+      "cgpa": 3.78,
+      "role": "student"
+    },
+    {
+      "id": "3",
+      "name": "Iseosa Aigbe",
+      "matric": "SCI2001142",
+      "email": "iseosa.aigbe@example.com",
+      "password": "student123",
+      "level": "200 Level",
+      "department": "Computer Science",
+      "cgpa": 4.02,
+      "role": "student"
+    },
+    {
+      "id": "4",
+      "name": "Osayande Eghosa",
+      "matric": "SCI2103889",
+      "email": "osayande.eghosa@example.com",
+      "password": "student123",
+      "level": "100 Level",
+      "department": "Computer Science",
+      "cgpa": 3.42,
+      "role": "student"
     }
   ],
   "submissions": [
@@ -111,5 +144,43 @@
   "settings": {
     "restrictedMinCgpa": 4.0,
     "maxUnitsPerSemester": 24
-  }
+  },
+  "advisors": [
+    {
+      "id": "1",
+      "name": "Oghenekaro Igbinovia",
+      "staffId": "ADV/CS/001",
+      "email": "oghenekaro.igbinovia@uniben.edu",
+      "password": "advisor123",
+      "department": "Computer Science",
+      "role": "advisor"
+    },
+    {
+      "id": "2",
+      "name": "Iyobosa Ehimwenma",
+      "staffId": "ADV/CS/002",
+      "email": "iyobosa.ehimwenma@uniben.edu",
+      "password": "advisor123",
+      "department": "Computer Science",
+      "role": "advisor"
+    }
+  ],
+  "admins": [
+    {
+      "id": "1",
+      "name": "Idia Osagie",
+      "staffId": "ADM/REG/001",
+      "email": "idia.osagie@uniben.edu",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "2",
+      "name": "Efe Iziengbe",
+      "staffId": "ADM/ICT/002",
+      "email": "efe.iziengbe@uniben.edu",
+      "password": "admin123",
+      "role": "admin"
+    }
+  ]
 }
