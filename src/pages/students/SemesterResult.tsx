@@ -10,59 +10,8 @@ import {
   Divider,
 } from "@mantine/core";
 import { FiArrowLeft, FiDownload, FiPrinter } from "react-icons/fi";
-import { useNavigate } from "react-router-dom";
-
-const courses = [
-  {
-    code: "CSC411",
-    title: "Advanced Software Engineering",
-    units: 3,
-    grade: "A",
-    point: 15.0,
-  },
-  {
-    code: "CSC412",
-    title: "Artificial Intelligence",
-    units: 3,
-    grade: "B",
-    point: 12.0,
-  },
-  {
-    code: "CSC413",
-    title: "Cloud Computing",
-    units: 2,
-    grade: "A",
-    point: 10.0,
-  },
-  {
-    code: "CSC414",
-    title: "Cybersecurity Principles",
-    units: 3,
-    grade: "B",
-    point: 12.0,
-  },
-  {
-    code: "CSC415",
-    title: "Compiler Construction",
-    units: 3,
-    grade: "A",
-    point: 15.0,
-  },
-  {
-    code: "CSC416",
-    title: "Web Services & Architecture",
-    units: 3,
-    grade: "A",
-    point: 15.0,
-  },
-  {
-    code: "CSC417",
-    title: "Industrial Attachment Report",
-    units: 4,
-    grade: "B",
-    point: 16.0,
-  },
-];
+import { useNavigate, useParams } from "react-router-dom";
+import { useGetResultsQuery } from "../../services/resultsApi";
 
 const gradeColor = (grade: string) => {
   switch (grade) {
@@ -81,6 +30,28 @@ const gradeColor = (grade: string) => {
 
 export default function SemesterResult() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { data: results } = useGetResultsQuery();
+
+  const userId = localStorage.getItem("userId");
+  const studentResults =
+    results?.find((item: any) => String(item.studentId) === String(userId)) ??
+    results?.[0];
+
+  const session =
+    studentResults?.sessions?.find(
+      (s: any) => String(s.id) === String(id),
+    ) ?? studentResults?.sessions?.[0];
+
+  const semester =
+    session?.semesters?.find((sem: any) => sem.name?.includes("First")) ??
+    session?.semesters?.[0];
+
+  const courses = semester?.courses ?? [];
+  const creditsEarned =
+    semester?.credits ??
+    courses.reduce((sum: number, c: any) => sum + Number(c.units ?? 0), 0);
+  const semesterGpa = semester?.gpa ?? 0;
 
   return (
     <Stack gap="xl">
@@ -89,7 +60,7 @@ export default function SemesterResult() {
         <Button
           variant="subtle"
           leftSection={<FiArrowLeft />}
-          onClick={() => navigate("/results")}
+          onClick={() => navigate("/student/results")}
         >
           Back to All Results
         </Button>
@@ -113,8 +84,10 @@ export default function SemesterResult() {
               <Text size="xs" tt="uppercase" c="dimmed">
                 Semester Breakdown
               </Text>
-              <Title order={3}>2022/2023 Session</Title>
-              <Text c="dimmed">1st Semester Results</Text>
+              <Title order={3}>{session?.year ?? "Session"}</Title>
+              <Text c="dimmed">
+                {semester?.name ?? "Semester"} Results
+              </Text>
             </Stack>
 
             <Group gap="xl">
@@ -123,7 +96,7 @@ export default function SemesterResult() {
                   Credits Earned
                 </Text>
                 <Text fw={700} size="lg">
-                  21.0
+                  {creditsEarned.toFixed(1)}
                 </Text>
               </Stack>
 
@@ -132,7 +105,7 @@ export default function SemesterResult() {
                   Semester GPA
                 </Text>
                 <Text fw={800} size="lg" c="blue">
-                  4.38
+                  {Number(semesterGpa).toFixed(2)}
                 </Text>
               </Stack>
             </Group>
@@ -153,17 +126,17 @@ export default function SemesterResult() {
             </Table.Thead>
 
             <Table.Tbody>
-              {courses.map((c) => (
+              {courses.map((c: any) => (
                 <Table.Tr key={c.code}>
                   <Table.Td fw={600}>{c.code}</Table.Td>
                   <Table.Td>{c.title}</Table.Td>
-                  <Table.Td>{c.units.toFixed(1)}</Table.Td>
+                  <Table.Td>{Number(c.units).toFixed(1)}</Table.Td>
                   <Table.Td>
                     <Badge color={gradeColor(c.grade)} variant="light">
                       {c.grade}
                     </Badge>
                   </Table.Td>
-                  <Table.Td>{c.point.toFixed(1)}</Table.Td>
+                  <Table.Td>{Number(c.point).toFixed(1)}</Table.Td>
                 </Table.Tr>
               ))}
             </Table.Tbody>
@@ -175,9 +148,9 @@ export default function SemesterResult() {
           <Group justify="space-between">
             <Text fw={600}>GPA for Semester</Text>
             <Group>
-              <Text fw={600}>21.0</Text>
+              <Text fw={600}>{creditsEarned.toFixed(1)}</Text>
               <Text fw={800} c="blue" size="lg">
-                4.38
+                {Number(semesterGpa).toFixed(2)}
               </Text>
             </Group>
           </Group>
@@ -218,7 +191,7 @@ export default function SemesterResult() {
           <Stack gap="sm">
             <Text fw={600}>Current Cumulative GPA</Text>
             <Title order={2}>
-              4.21{" "}
+              {Number(studentResults?.cgpa ?? 0).toFixed(2)}{" "}
               <Text span size="lg" c="dimmed">
                 / 5.00
               </Text>
